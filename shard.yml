@@ -1,0 +1,17 @@
+name: brrr
+version: 0.1.0
+
+authors:
+  - Siegfried Ehret <siegfried@ehret.me>
+
+dependencies:
+  halite:
+    github: icyleaf/halite
+
+targets:
+  brrr:
+    main: src/brrr.cr
+
+crystal: 0.34.0
+
+license: MIT

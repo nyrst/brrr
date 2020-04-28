@@ -10,11 +10,17 @@ Download `brrr` from the [releases page](https://github.com/SiegfriedEhret/brrr/
 
 Run `brrr` !
 
+:warning: For now, you will have to add `~/.config/brrr/bin` to your PATH.
+
 The following commands are available:
 
+- (soon!) `brrr cache <something>`: to interact with the cache.
 - `brrr config <args>`: to manage `brrr` configuration.
+- (soon!) `brrr doctor`: to find what is wrong in your brrr files.
 - `brrr install <args>`: to install one (or more) packages.
 - `brrr help`: to display some help
+- `brrr uninstall <args>`: to remove packages.
+- (soon!) `brrr update <args?>`: to update everything or a specific package.
 - `brrr version`: to display the current version.
 
 ### `brrr config <command> <key?> <value?>`
@@ -28,16 +34,10 @@ The available configuration options are:
 
 ### `brrr install <args>`
 
-Example: 
+Examples: 
 
-- a name from the [freezer](https://github.com/SiegfriedEhret/freezer) repository. Use `brrr install exa` to install [exa](https://github.com/ogham/exa)
-- a local file. Use `brrr install ./something.yaml` to install the `something` package.
-
-### In the near future:
-
-- `brrr cache <something>`: to interact with the cache.
-- `brrr remove <args>`: to remove packages.
-- `brrr update <args?>`: to update everything or a specific package.
+- To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something.
+- To use a local file, use `brrr install ./something.yaml` to install the `something` package.
 
 ## Cache and configuration
 

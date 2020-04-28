@@ -3,7 +3,7 @@ require "yaml"
 module Brrr
   struct Binary
     YAML.mapping(
-      binaries: Hash(String, String)?,
+      binaries: Hash(String, String),
       binary_type: String,
       hash: String?,
       hash_type: String?,

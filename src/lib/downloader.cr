@@ -8,7 +8,6 @@ module Brrr
 
     def self.get_file(url : String, target : Path)
       response = HTTP::Client.get url
-      puts target
 
       Halite.follow.get(url) do |response|
         # TODO response.status_code  # => 200

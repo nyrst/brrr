@@ -17,10 +17,14 @@ module Brrr
           Commands::Cache.run
         when "config"
           Commands::Configure.run(config, args[1..-1])
+        when "doctor"
+          Commands::Doctor.run
         when "help"
           Commands::Help.run
         when "install"
           Commands::Install.run(config, cache, args[1..-1])
+        when "uninstall"
+          Commands::Uninstall.run(config, cache, args[1..-1])
         when "update"
           Commands::Update.run
         when "version"

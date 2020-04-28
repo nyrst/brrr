@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.3.0)
+
+- Add `uninstall` command.
+- Update some logs and error messages.
+
 ## [0.2.0](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.2.0)
 
 - Allow to configure brrr (`brrr config list`, `brrr config set arch <value>`).

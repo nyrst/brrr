@@ -46,6 +46,10 @@ module Brrr
       @conf.arch
     end
 
+    def installed
+      @conf.installed
+    end
+
     def link(package : String, binaries : Hash(String, String)?)
       if binaries.nil?
         return
@@ -72,6 +76,18 @@ module Brrr
     def add_installed_package(package : String, version : String)
       @conf.installed[package] = version
 
+      save
+    end
+
+    def remove(package : String, links : Array(String))
+      # Remove config package
+      FileUtils.rm_rf (packages_path / package).to_s
+
+      # Remove config symbolic links
+      FileUtils.rm_rf links.map { |ln| (bin_path / ln).to_s }
+
+      # Remove from installed version
+      @conf.installed.delete package
       save
     end
 

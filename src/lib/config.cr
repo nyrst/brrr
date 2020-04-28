@@ -52,11 +52,16 @@ module Brrr
       end
 
       binaries.each do |key, value|
-        puts "Linking #{@packages_path / package / key} to #{@bin_path / value}"
         from = @packages_path / package / key
         to = @bin_path / value
-        File.chmod(from, 0o755)
-        FileUtils.ln_s(from.to_s, to.to_s)
+
+        if File.exists? from
+          puts "Linking #{from} to #{to}"
+          File.chmod(from, 0o755)
+          FileUtils.ln_s(from.to_s, to.to_s)
+        else
+          puts "Failed to link #{from} to #{to}"
+        end
       end
     end
 

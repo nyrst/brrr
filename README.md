@@ -10,7 +10,10 @@ Download `brrr` from the [releases page](https://github.com/SiegfriedEhret/brrr/
 
 Run `brrr` !
 
-:warning: For now, you will have to add `~/.config/brrr/bin` to your PATH.
+:warning:
+
+- You need to have `tar` and `unzip` installed.
+- For now, you will have to add `~/.config/brrr/bin` to your PATH.
 
 The following commands are available:
 

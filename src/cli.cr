@@ -16,7 +16,7 @@ module Brrr
         when "cache"
           Commands::Cache.run
         when "config"
-          Commands::Configure.run(config, args[1..-1])
+          Commands::Configure.new(config, args[1..-1])
         when "doctor"
           Commands::Doctor.run
         when "help"

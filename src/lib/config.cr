@@ -70,7 +70,8 @@ module Brrr
     end
 
     def list
-      puts @conf
+      puts "Reading configuration from #{@config_filepath}"
+      puts @conf.to_yaml
     end
 
     def add_installed_package(package : String, version : String)

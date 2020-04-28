@@ -17,14 +17,13 @@ Run `brrr` !
 
 The following commands are available:
 
-- (soon!) `brrr cache <something>`: to interact with the cache.
-- `brrr config <args>`: to manage `brrr` configuration.
-- (soon!) `brrr doctor`: to find what is wrong in your brrr files.
-- `brrr install <args>`: to install one (or more) packages.
-- `brrr help`: to display some help
-- `brrr uninstall <args>`: to remove packages.
-- (soon!) `brrr update <args?>`: to update everything or a specific package.
-- `brrr version`: to display the current version.
+### `brrr cache <command>`
+
+To interact with the cache.
+
+The following commands are available:
+
+- `clean`: to remove uninstalled packages and binaries from installed packages. YAML files are preserved for installed packages.
 
 ### `brrr config <command> <key?> <value?>`
 
@@ -35,12 +34,32 @@ The available configuration options are:
 
 - `arch`: supported values are `linux` or `macos`. 
 
-### `brrr install <args>`
+### `brrr install <package names>`
+
+To install one or more packages.
 
 Examples: 
 
 - To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something.
 - To use a local file, use `brrr install ./something.yaml` to install the `something` package.
+
+
+### `brrr help`
+
+To display some help with the available commands.
+
+### `brrr uninstall <package names>`
+
+The opposite of `install`!
+
+### `brrr version`
+
+To display the current version.
+
+### Soon
+
+- `brrr doctor`: to find what is wrong in your brrr files.
+- `brrr update <args?>`: to update everything or a specific package.
 
 ## Cache and configuration
 

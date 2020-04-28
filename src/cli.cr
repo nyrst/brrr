@@ -12,7 +12,9 @@ module Brrr
 
     OptionParser.parse(ARGV) do |opts|
       opts.unknown_args do |args, options|
-        case args[0]? || DEFAULT_COMMAND
+        command = args[0]? || DEFAULT_COMMAND
+
+        case command
         when "cache"
           Commands::Cache.run
         when "config"
@@ -22,13 +24,15 @@ module Brrr
         when "help"
           Commands::Help.run
         when "install"
-          Commands::Install.run(config, cache, args[1..-1])
+          Commands::Install.new(config, cache, args[1..-1])
         when "uninstall"
-          Commands::Uninstall.run(config, cache, args[1..-1])
+          Commands::Uninstall.new(config, cache, args[1..-1])
         when "update"
           Commands::Update.run
         when "version"
           Commands::Version.run
+        else
+          puts "Unknown command: #{command}"
         end
       end
     end

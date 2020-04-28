@@ -1,34 +1,39 @@
 module Brrr
   module Commands
     class Uninstall
-      def self.run(config : Brrr::Config, cache : Brrr::Cache, args : Array(String))
+      def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
         args.each do |name|
-          # Read installed version
-          installed_version = config.installed[name]
+          uninstall name
+        end
+      end
 
-          puts "Removing #{name} v#{installed_version}"
+      protected def uninstall(name : String)
+        # Read installed version
+        arch = @config.arch
+        installed_version = @config.installed[name]
 
-          # Read cache yaml
-          package = cache.read_yaml name
+        puts "Removing #{name} v#{installed_version}"
 
-          if !package.nil?
-            if !package.versions.has_key? installed_version
-              puts "Version #{installed_version} not found."
-              return
-            end
+        # Read cache yaml
+        package = @cache.read_yaml name
 
-            binary = package.versions[installed_version]
-            if !binary.has_key? config.arch
-              puts "Binary for arch #{config.arch} not found."
-              return
-            end
-
-            # Clean configuration
-            config.remove(name, binary[config.arch].symlinks.values)
-
-            # Clean cache
-            cache.remove name
+        if !package.nil?
+          if !package.versions.has_key? installed_version
+            puts "Version #{installed_version} not found."
+            return
           end
+
+          binary = package.versions[installed_version]
+          if !binary.has_key? arch
+            puts "Binary for arch #{arch} not found."
+            return
+          end
+
+          # Clean configuration
+          @config.remove(name, binary[arch].symlinks.values)
+
+          # Clean cache
+          @cache.remove name
         end
       end
     end

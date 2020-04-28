@@ -4,7 +4,7 @@ module Brrr
       def initialize(@config : Brrr::Config, @args : Array(String))
         if args.size == 0
           puts "`brrr config` needs some options."
-          Commands::Help.run
+          Commands::Help.new
           return
         end
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.5.1)
+
+- Add `brrr cache clean`.
+- Some refactoring :smile:
+
 ## [0.3.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.3.1)
 
 - Update display of version

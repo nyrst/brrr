@@ -16,7 +16,7 @@ module Brrr
 
         case command
         when "cache"
-          Commands::Cache.run
+          Commands::Cache.new(config, cache, args[1..-1])
         when "config"
           Commands::Configure.new(config, args[1..-1])
         when "doctor"

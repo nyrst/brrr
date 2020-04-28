@@ -15,6 +15,10 @@ module Brrr
       end
     end
 
+    def get_all_packages
+      Dir.new(@path.to_s).children
+    end
+
     def read_yaml(package : String)
       package_path = @path / package / "#{package}.yaml"
 
@@ -29,6 +33,14 @@ module Brrr
 
     def remove(package : String)
       FileUtils.rm_rf (@path / package).to_s
+    end
+
+    def remove_binary(package : String)
+      Dir.new((@path / package).to_s).children.each do |e|
+        if e != "#{package}.yaml"
+          FileUtils.rm_rf (@path / package / e).to_s
+        end
+      end
     end
   end
 end

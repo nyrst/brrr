@@ -2,6 +2,10 @@ module Brrr
   module Commands
     class Uninstall
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
+        if args.size == 0
+          puts "Nothing to do."
+        end
+
         args.each do |name|
           uninstall name
         end

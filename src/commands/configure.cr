@@ -14,6 +14,8 @@ module Brrr
           list
         elsif command == "set"
           set
+        else
+          puts "Nothing to do."
         end
       end
 

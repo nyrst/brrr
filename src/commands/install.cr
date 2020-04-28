@@ -51,6 +51,8 @@ module Brrr
           Downloader.extract(cache_target_path, binary, config.packages_path / name)
 
           config.link(name, binary.binaries)
+
+          config.add_installed_package(package_name, latest_version)
         end
       end
     end

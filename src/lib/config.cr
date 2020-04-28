@@ -33,8 +33,11 @@ module Brrr
         @conf = BrrrConfig.from_yaml(
           <<-END
          arch: linux
+         installed: {}
          END
         )
+
+        save
       end
     end
 
@@ -61,13 +64,22 @@ module Brrr
       puts @conf
     end
 
+    def add_installed_package(package : String, version : String)
+      @conf.installed[package] = version
+
+      save
+    end
+
     def set(key : String, value : String)
-      puts "Set #{key}: #{value}"
       if key == "arch"
         @conf.arch = value
       end
 
-      File.open(@config_filepath, "w") { |f| @conf.to_yaml(f) } # writes it to the file
+      save
+    end
+
+    def save
+      File.open(@config_filepath, "w") { |f| @conf.to_yaml(f) }
     end
   end
 end

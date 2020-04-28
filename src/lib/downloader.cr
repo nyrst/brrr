@@ -21,9 +21,7 @@ module Brrr
       content = file.gets_to_end
 
       result = false
-      computed_hash = Digest::SHA1.hexdigest(content)
-      puts "#{computed_hash} // #{binary.hash}"
-      if binary.hash_type == HASH_SHA1 && computed_hash == binary.hash
+      if binary.hash_type == HASH_SHA1 && Digest::SHA1.hexdigest(content) == binary.hash
         result = true
       end
       if binary.hash_type == HASH_MD5 && Digest::MD5.hexdigest(content) == binary.hash

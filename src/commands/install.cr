@@ -59,7 +59,7 @@ module Brrr
           Downloader.extract(cache_target_path, binary, config.packages_path / name)
 
           # And write some symbolic links
-          config.link(name, binary.binaries)
+          config.link(name, binary.symlinks)
 
           # Finally, we add the package to our installed packages
           config.add_installed_package(name, latest_version)

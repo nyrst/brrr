@@ -24,7 +24,7 @@ module Brrr
             end
 
             # Clean configuration
-            config.remove(name, binary[config.arch].binaries.values)
+            config.remove(name, binary[config.arch].symlinks.values)
 
             # Clean cache
             cache.remove name

@@ -50,12 +50,12 @@ module Brrr
       @conf.installed
     end
 
-    def link(package : String, binaries : Hash(String, String)?)
-      if binaries.nil?
+    def link(package : String, symlinks : Hash(String, String)?)
+      if symlinks.nil?
         return
       end
 
-      binaries.each do |key, value|
+      symlinks.each do |key, value|
         from = @packages_path / package / key
         to = @bin_path / value
 

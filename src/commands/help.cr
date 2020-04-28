@@ -7,10 +7,11 @@ module Brrr
 
       Commands:
         config
-          list                To list the current configuration options
-          set <key> <value>   To set a configuration option
-        install               Install something.
+          list                To list the current configuration options.
+          set <key> <value>   To set a configuration option.
+        install <args>        Install something.
         help                  Show help.
+        uninstall <args>      Uninstall something.
         version               Print the current version of brrr.
      HELP
 

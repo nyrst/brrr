@@ -8,6 +8,7 @@ module Brrr
     getter path : Path
     getter bin_path : Path
     getter packages_path : Path
+    getter config_filepath : Path
 
     def initialize
       @home = Path.home
@@ -23,9 +24,9 @@ module Brrr
         Dir.mkdir_p(@packages_path, 0o755)
       end
 
-      config_filepath = @path / @filename
-      if File.exists? config_filepath
-        @conf = File.open(config_filepath) do |file|
+      @config_filepath = @path / @filename
+      if File.exists? @config_filepath
+        @conf = File.open(@config_filepath) do |file|
           BrrrConfig.from_yaml(file)
         end
       else
@@ -54,6 +55,19 @@ module Brrr
         File.chmod(from, 0o755)
         FileUtils.ln_s(from.to_s, to.to_s)
       end
+    end
+
+    def list
+      puts @conf
+    end
+
+    def set(key : String, value : String)
+      puts "Set #{key}: #{value}"
+      if key == "arch"
+        @conf.arch = value
+      end
+
+      File.open(@config_filepath, "w") { |f| @conf.to_yaml(f) } # writes it to the file
     end
   end
 end

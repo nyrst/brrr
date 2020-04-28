@@ -23,7 +23,19 @@ module Brrr
           name = package.name
           latest_version = package.latest_version
 
-          binary = package.versions[latest_version][config.arch]
+          if !package.versions.has_key? latest_version
+            puts "Version #{latest_version} not found in binaries list."
+            return
+          end
+
+          latest_binary = package.versions[latest_version]
+
+          if !latest_binary.has_key? config.arch
+            puts "Binary for arch #{config.arch} not found. Available archs are: #{latest_binary.keys.join(",")}"
+            return
+          end
+
+          binary = latest_binary[config.arch]
 
           start_index = (binary.url.rindex("/") || 0) + 1
           binary_name = binary.url[start_index..-1]

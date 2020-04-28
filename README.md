@@ -12,9 +12,19 @@ Run `brrr` !
 
 The following commands are available:
 
+- `brrr config <args>`: to manage `brrr` configuration.
 - `brrr install <args>`: to install one (or more) packages.
 - `brrr help`: to display some help
 - `brrr version`: to display the current version.
+
+### `brrr config <command> <key?> <value?>`
+
+- `brrr config list` to list current configuration.
+- `brrr config set <key> <value>`: to set a configuration options.
+
+The available configuration options are:
+
+- `arch`: supported values are `linux` or `macos`. 
 
 ### `brrr install <args>`
 
@@ -26,7 +36,6 @@ Example:
 ### In the near future:
 
 - `brrr cache <something>`: to interact with the cache.
-- `brrr configure`: to manage `brrr` options.
 - `brrr remove <args>`: to remove packages.
 - `brrr update <args?>`: to update everything or a specific package.
 

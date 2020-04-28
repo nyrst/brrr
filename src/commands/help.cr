@@ -3,12 +3,15 @@ module Brrr
     class Help
       def self.run
         puts <<-HELP
-     brrr [<command>] [<options>]
+      brrr [<command>] [<options>]
 
-     Commands:
-         install   Install something.
-         help      Show help.
-         version   Print the current version of brrr.
+      Commands:
+        config
+          list                To list the current configuration options
+          set <key> <value>   To set a configuration option
+        install               Install something.
+        help                  Show help.
+        version               Print the current version of brrr.
      HELP
 
         exit 0

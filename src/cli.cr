@@ -15,12 +15,12 @@ module Brrr
         case args[0]? || DEFAULT_COMMAND
         when "cache"
           Commands::Cache.run
-        when "configure"
-          Commands::Configure.run
+        when "config"
+          Commands::Configure.run(config, args[1..-1])
         when "help"
           Commands::Help.run
         when "install"
-          Commands::Install.run(config, cache, args.skip(1))
+          Commands::Install.run(config, cache, args[1..-1])
         when "update"
           Commands::Update.run
         when "version"

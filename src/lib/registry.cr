@@ -4,14 +4,11 @@ require "./cache"
 module Brrr
   class Api
     property registry : String = "http://siegfriedehret.github.io/freezer/"
-    getter cache : Cache
 
     def initialize(registry : String?)
       if !registry.nil?
         @registry = registry
       end
-
-      @cache = Cache.new
     end
 
     def get_package(package : String)

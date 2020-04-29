@@ -52,6 +52,13 @@ To display some help with the available commands.
 
 The opposite of `install`!
 
+### `brrr upgrade <package names>`
+
+To upgrade everything or a specific package.
+
+- Use `brrr upgrade` to start the upgrade process on all your packages.
+- Use `brrr <package names>` to start the upgrade process on given packages.
+
 ### `brrr version`
 
 To display the current version.
@@ -59,7 +66,6 @@ To display the current version.
 ### Soon
 
 - `brrr doctor`: to find what is wrong in your brrr files.
-- `brrr update <args?>`: to update everything or a specific package.
 
 ## Cache and configuration
 

@@ -11,9 +11,10 @@ module Brrr
         config
           list                      To list the current configuration options.
           set <key> <value>         To set a configuration option.
-        install <package names>     Install something.
+        install <package names>     Install a package.
         help                        Show help.
-        uninstall <package names>   Uninstall something.
+        upgrade <package names>     Upgrade everything or specific packages.
+        uninstall <package names>   Uninstall packages.
         version                     Print the current version of brrr.
      HELP
 

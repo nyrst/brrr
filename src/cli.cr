@@ -27,8 +27,8 @@ module Brrr
           Commands::Install.new(config, cache, args[1..-1])
         when "uninstall"
           Commands::Uninstall.new(config, cache, args[1..-1])
-        when "update"
-          Commands::Update.run
+        when "upgrade"
+          Commands::Upgrade.new(config, cache, args[1..-1])
         when "version"
           Commands::Version.run
         else

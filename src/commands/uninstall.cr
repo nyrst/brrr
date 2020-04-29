@@ -11,7 +11,7 @@ module Brrr
         end
       end
 
-      protected def uninstall(name : String)
+      def uninstall(name : String)
         # Read installed version
         arch = @config.arch
         installed_version = @config.installed[name]

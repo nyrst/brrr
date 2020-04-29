@@ -1,3 +1,4 @@
+require "../lib/common"
 require "../lib/downloader"
 require "../lib/registry"
 
@@ -11,7 +12,6 @@ module Brrr
           puts "Nothing to do."
         end
 
-        # TODO Make this parallel for multiple packages
         args.each do |package_name|
           install package_name
         end
@@ -47,7 +47,7 @@ module Brrr
 
       protected def install(package_name : String)
         # Let's get this package
-        yaml = get_yaml package_name
+        yaml = Common.get_yaml(@registry, package_name)
 
         # Now, time to read the package and get some info
         package = Package.from_yaml(yaml)

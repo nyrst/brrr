@@ -1,30 +1,34 @@
 # Changelog
 
+## [0.13.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.1)
+
+- :gift: add `brrr upgrade` command.
+
 ## [0.8.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.8.1)
 
-- Switch to `nyrst` organization url.
+- :truck: Switch to `nyrst` organization url.
 
 ## [0.5.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.5.1)
 
-- Add `brrr cache clean`.
-- Some refactoring :smile:
+- :gift: Add `brrr cache clean`.
+- :wrench: Some refactoring :smile:
 
 ## [0.3.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.3.1)
 
-- Update display of version
-- Update cli docs
+- :art: Update display of version
+- :memo: Update cli docs
 
 ## [0.3.0](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.3.0)
 
-- Add `uninstall` command.
-- Update some logs and error messages.
+- :gift: Add `uninstall` command.
+- :art: Update some logs and error messages.
 
 ## [0.2.0](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.2.0)
 
-- Allow to configure brrr (`brrr config list`, `brrr config set arch <value>`).
-- Add logs for version and arch when incompatible.
+- :gift: Allow to configure brrr (`brrr config list`, `brrr config set arch <value>`).
+- :memo: Add logs for version and arch when incompatible.
 
 ## [0.1.0](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.1.0)
 
-- Initial version!
-- It works on my computer :tm:.
+- :rocket: Initial version!
+- :smile: It works on my computer :tm:.

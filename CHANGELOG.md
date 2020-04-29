@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.8.1)
+
+- Switch to `nyrst` organization url.
+
 ## [0.5.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.5.1)
 
 - Add `brrr cache clean`.

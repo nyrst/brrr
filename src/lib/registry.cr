@@ -3,7 +3,7 @@ require "./cache"
 
 module Brrr
   class Api
-    property registry : String = "http://siegfriedehret.github.io/freezer/"
+    property registry : String = "http://nyrst.github.io/freezer/"
 
     def initialize(registry : String?)
       if !registry.nil?

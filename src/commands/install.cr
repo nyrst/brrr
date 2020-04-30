@@ -78,8 +78,8 @@ module Brrr
 
         cache_target_path = download_and_get_target(binary.url, cache_package_dir)
 
-        # If a hash is provided, we verify the package
-        if binary.hash && !Downloader.verify(cache_target_path, binary)
+        # Let's verify the hash (check if present is in the `verify` function)
+        if !Downloader.verify(cache_target_path, binary)
           puts "Failed to verify checksum for file #{cache_target_path}."
           return
         end

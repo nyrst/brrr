@@ -16,12 +16,12 @@ module Brrr
       file = File.new(path)
       content = file.gets_to_end
 
-      result = false
-      if !binary.hash_sha1.nil? && Digest::SHA1.hexdigest(content) == binary.hash_sha1
-        result = true
+      result = true
+      if !binary.hash_sha1.nil? && Digest::SHA1.hexdigest(content) != binary.hash_sha1
+        result = false
       end
-      if !binary.hash_md5.nil? && Digest::MD5.hexdigest(content) == binary.hash_md5
-        result = true
+      if !binary.hash_md5.nil? && Digest::MD5.hexdigest(content) != binary.hash_md5
+        result = false
       end
 
       file.close

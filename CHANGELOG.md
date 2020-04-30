@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.13.3](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.3)
+
+- :bug: fix hash handling (again)
+
 ## [0.13.2](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.2)
 
 - :bug: fix hash handling

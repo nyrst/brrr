@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.13.2](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.2)
+
+- :bug: fix hash handling
+
 ## [0.13.1](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.1)
 
 - :gift: add `brrr upgrade` command.

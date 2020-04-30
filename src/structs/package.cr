@@ -3,10 +3,10 @@ require "yaml"
 module Brrr
   struct Binary
     YAML.mapping(
-      symlinks: Hash(String, String),
       binary_type: String,
-      hash: String?,
-      hash_type: String?,
+      hash_sha1: String?,
+      hash_md5: String?,
+      symlinks: Hash(String, String),
       url: String
     )
   end

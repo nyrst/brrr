@@ -3,9 +3,6 @@ require "halite"
 
 module Brrr
   class Downloader
-    HASH_SHA1 = "sha1"
-    HASH_MD5  = "md5"
-
     def self.get_file(url : String, target : Path)
       response = HTTP::Client.get url
 
@@ -20,10 +17,10 @@ module Brrr
       content = file.gets_to_end
 
       result = false
-      if binary.hash_type == HASH_SHA1 && Digest::SHA1.hexdigest(content) == binary.hash
+      if !binary.hash_sha1.nil? && Digest::SHA1.hexdigest(content) == binary.hash_sha1
         result = true
       end
-      if binary.hash_type == HASH_MD5 && Digest::MD5.hexdigest(content) == binary.hash
+      if !binary.hash_md5.nil? && Digest::MD5.hexdigest(content) == binary.hash_md5
         result = true
       end
 

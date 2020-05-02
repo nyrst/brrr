@@ -4,7 +4,7 @@ require "./lib/cache"
 require "./lib/config"
 
 module Brrr
-  DEFAULT_COMMAND = "install"
+  DEFAULT_COMMAND = "help"
 
   def self.run
     config = Config.new
@@ -20,7 +20,7 @@ module Brrr
         when "config"
           Commands::Configure.new(config, args[1..-1])
         when "doctor"
-          Commands::Doctor.run
+          Commands::Doctor.new(config, cache, args[1..-1])
         when "help"
           Commands::Help.run
         when "install"

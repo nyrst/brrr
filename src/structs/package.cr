@@ -6,7 +6,7 @@ module Brrr
       binary_type: String,
       hash_sha1: String?,
       hash_md5: String?,
-      symlinks: Hash(String, String),
+      symlinks: Hash(String, String)?,
       url: String
     )
   end

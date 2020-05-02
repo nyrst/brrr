@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.21.3](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.21.3)
+
+- :gift: add `brrr doctor` command.
+
 ## [0.13.3](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.13.3)
 
 - :bug: fix hash handling (again)

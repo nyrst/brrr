@@ -8,6 +8,7 @@ module Brrr
 
         args.each do |name|
           uninstall name
+          puts ""
         end
       end
 
@@ -34,7 +35,8 @@ module Brrr
           end
 
           # Clean configuration
-          @config.remove(name, binary[arch].symlinks.values)
+          symlinks = binary[arch].symlinks
+          @config.remove(name, symlinks.nil? ? [] of String : symlinks.values)
 
           # Clean cache
           @cache.remove name

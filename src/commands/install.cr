@@ -14,21 +14,8 @@ module Brrr
 
         args.each do |package_name|
           install package_name
+          puts ""
         end
-      end
-
-      protected def get_yaml(package_name : String)
-        local_path = Path[package_name].expand(Dir.current)
-        is_local = @registry.is_local_package local_path
-
-        if is_local
-          @registry.get_local_package local_path
-        else
-          @registry.get_package package_name
-        end
-      end
-
-      protected def check_version_and_arch
       end
 
       protected def download_and_get_target(url : String, cache_package_dir : Path)
@@ -38,11 +25,6 @@ module Brrr
         Downloader.get_file(url, cache_target_path)
 
         cache_target_path
-      end
-
-      protected def save_yaml(cache_package_dir : Path, name : String, yaml : String)
-        FileUtils.mkdir_p(cache_package_dir.to_s)
-        File.write("#{cache_package_dir}/#{name}.yaml", yaml)
       end
 
       protected def install(package_name : String)
@@ -72,7 +54,7 @@ module Brrr
         puts "Installing #{name} v#{latest_version}"
 
         # Let's save this yaml
-        save_yaml(cache_package_dir, name, yaml)
+        Common.save_yaml(cache_package_dir, name, yaml)
 
         # Time to download the binary
 

@@ -10,5 +10,10 @@ module Brrr
         registry.get_package package_name
       end
     end
+
+    def self.save_yaml(cache_package_dir : Path, name : String, yaml : String)
+      FileUtils.mkdir_p(cache_package_dir.to_s)
+      File.write("#{cache_package_dir}/#{name}.yaml", yaml)
+    end
   end
 end

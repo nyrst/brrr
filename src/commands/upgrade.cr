@@ -14,6 +14,7 @@ module Brrr
 
         args.each do |package_name|
           upgrade package_name
+          puts ""
         end
       end
 

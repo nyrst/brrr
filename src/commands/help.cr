@@ -3,18 +3,23 @@ module Brrr
     class Help
       def self.run
         puts <<-HELP
-      brrr [<command>] [<options>]
+      brrr <command> [<options>]
 
-      Commands:
-        cache
-          clean                     To clean the cache of unused packages.
+      Basic commands:
+
         config
-          list                      To list the current configuration options.
-          set <key> <value>         To set a configuration option.
+          list                      List the current configuration options.
+          set <key> <value>         Set a configuration option.
         install <package names>     Install a package.
-        help                        Show help.
         upgrade <package names>     Upgrade everything or specific packages.
         uninstall <package names>   Uninstall packages.
+
+      Utility commands:
+
+        cache
+          clean                     Clean the cache of unused packages.
+        doctor                      Check the sanity of your installed packages.
+        help                        Show help.
         version                     Print the current version of brrr.
      HELP
 

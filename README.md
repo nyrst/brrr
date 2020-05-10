@@ -64,6 +64,10 @@ To find what is wrong in your brrr files.
 
 To display some help with the available commands.
 
+#### `brrr reset`
+
+Remove all installed packages (like `uninstall` but shorter).
+
 #### `brrr version`
 
 To display the current version.

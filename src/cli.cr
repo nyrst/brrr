@@ -25,6 +25,8 @@ module Brrr
           Commands::Help.run
         when "install"
           Commands::Install.new(config, cache, args[1..-1])
+        when "reset"
+          Commands::Reset.new(config, cache)
         when "uninstall"
           Commands::Uninstall.new(config, cache, args[1..-1])
         when "upgrade"

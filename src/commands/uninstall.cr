@@ -34,12 +34,10 @@ module Brrr
             return
           end
 
-          # Clean configuration
-          symlinks = binary[arch].symlinks
-          @config.remove(name, symlinks.nil? ? [] of String : symlinks.values)
+          @config.uninstall(name, binary[arch])
 
           # Clean cache
-          @cache.remove name
+          @cache.uninstall name
         end
       end
     end

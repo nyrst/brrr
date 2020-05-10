@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.21.5](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.21.5)
+
+- Nothing much, a new way to handle post install scripts.
+
 ## [0.21.3](https://github.com/SiegfriedEhret/brrr/releases/tag/v0.21.3)
 
 - :gift: add `brrr doctor` command.

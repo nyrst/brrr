@@ -21,7 +21,7 @@ module Brrr
 
         # Remove packages that are not installed
         to_remove_completely = cache_packages - installed_packages
-        to_remove_completely.map { |p| @cache.remove p }
+        to_remove_completely.map { |p| @cache.uninstall p }
 
         # For installed packages, keep only the yaml file
         installed_packages.each { |p| @cache.remove_binary p }

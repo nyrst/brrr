@@ -50,22 +50,76 @@ module Brrr
       @conf.installed
     end
 
-    def link(package : String, symlinks : Hash(String, String)?)
-      if symlinks.nil?
-        return
-      end
+    def post_install(package : String, scripts : Array(PostInstall))
+      scripts.each do |script|
+        case script.type
+        when PostInstallType.move
+          source = script.source
+          target = script.target
 
-      symlinks.each do |key, value|
-        from = @packages_path / package / key
-        to = @bin_path / value
+          if !source.nil? && !target.nil?
+            move(package, source, target)
+          end
+        when PostInstallType.symlink
+          source = script.source
+          target = script.target
 
-        if File.exists? from
-          puts "Linking #{from} to #{to}"
-          File.chmod(from, 0o755)
-          FileUtils.ln_s(from.to_s, to.to_s)
+          if !source.nil? && !target.nil?
+            link(package, source, target)
+          end
         else
-          puts "Failed to link #{from} to #{to}"
+          puts "Unknown script command: #{script.type}."
         end
+      end
+    end
+
+    def post_uninstall(package : String, scripts : Array(PostInstall))
+      scripts.each do |script|
+        case script.type
+        when PostInstallType.move
+          FileUtils.rm_rf (bin_path / script.target).to_s
+        when PostInstallType.symlink
+          FileUtils.rm_rf (bin_path / script.target).to_s
+        else
+          puts "Unknown script command: #{script.type}."
+        end
+      end
+    end
+
+    protected def link(package : String, file_path : String, link_path : String)
+      source = @packages_path / package / file_path
+
+      canResolvePath = link_path.starts_with?("/") || link_path.starts_with?(".") || link_path.starts_with?("~")
+      target = if canResolvePath
+                 Path[link_path].expand(home: Path.home)
+               else
+                 @bin_path / link_path
+               end
+
+      if File.exists? source
+        puts "Linking #{source} to #{target}"
+        File.chmod(source, 0o755)
+        FileUtils.ln_sf(source.to_s, target.to_s)
+      else
+        puts "Failed to link #{source} to #{target}"
+      end
+    end
+
+    protected def move(package : String, file_path : String, link_path : String)
+      source = @packages_path / package / file_path
+
+      canResolvePath = link_path.starts_with?("/") || link_path.starts_with?(".") || link_path.starts_with?("~")
+      to = if canResolvePath
+             Path[link_path].expand(home: Path.home)
+           else
+             link_path
+           end
+
+      if File.exists? source
+        puts "Moving #{source} to #{to}"
+        FileUtils.mv([source.to_s], to.to_s)
+      else
+        puts "Failed to move #{source} to #{to}"
       end
     end
 
@@ -80,12 +134,12 @@ module Brrr
       save
     end
 
-    def remove(package : String, links : Array(String))
+    def uninstall(package : String, binary : Binary)
       # Remove config package
       FileUtils.rm_rf (packages_path / package).to_s
 
-      # Remove config symbolic links
-      FileUtils.rm_rf links.map { |ln| (bin_path / ln).to_s }
+      # Remove script contents
+      post_uninstall(package, binary.post_install)
 
       # Remove from installed version
       @conf.installed.delete package

@@ -69,8 +69,9 @@ module Brrr
         # Then we can extract from the cache to our packages folder
         Downloader.extract(cache_target_path, binary, @config.packages_path / name)
 
-        # And write some symbolic links
-        @config.link(name, binary.symlinks)
+        if binary.post_install
+          @config.post_install(name, binary.post_install)
+        end
 
         # Finally, we add the package to our installed packages
         @config.add_installed_package(name, latest_version)

@@ -31,7 +31,7 @@ module Brrr
       yaml
     end
 
-    def remove(package : String)
+    def uninstall(package : String)
       FileUtils.rm_rf (@path / package).to_s
     end
 

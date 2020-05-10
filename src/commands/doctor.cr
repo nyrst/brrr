@@ -12,9 +12,11 @@ module Brrr
 
         @config.installed.each do |package_name, package_version|
           puts "Checking #{package_name}..."
-          has_errors = doctor(package_name, package_version)
-          if !has_errors
+          is_ok = doctor(package_name, package_version)
+          if is_ok
             puts "All good!"
+          else
+            puts "Errors found, please reinstall #{package_name}"
           end
         end
       end
@@ -34,12 +36,20 @@ module Brrr
           return true
         end
 
-        symlinks = binary.symlinks
-        if !symlinks.nil?
-          return check_symlinks_errors(package_name, symlinks)
+        is_ok = [] of Bool
+
+        binary.post_install.each do |script|
+          case script.type
+          when PostInstallType.move
+            # TODO
+          when PostInstallType.symlink
+            is_ok << is_symlink_ok(package_name, script.source, script.target)
+          else
+            puts "Unknown script command: #{script.type}."
+          end
         end
 
-        return false
+        return is_ok.all?
       end
 
       protected def download_yaml_and_load(package_name : String)
@@ -47,6 +57,7 @@ module Brrr
         package = Package.from_yaml(yaml)
         name = package.name
         cache_package_dir = @cache.path / name
+
         Common.save_yaml(cache_package_dir, name, yaml)
 
         package
@@ -66,19 +77,19 @@ module Brrr
         return binary[@config.arch]
       end
 
-      def check_symlinks_errors(package_name : String, symlinks : Hash(String, String))
-        errors = 0
+      protected def is_moved_ok
+      end
 
-        symlinks.each do |exec_path, symlink_path|
-          execOk = File.exists? @config.packages_path / package_name / exec_path
-          symlinkOk = File.exists? @config.bin_path / symlink_path
-          if !execOk || !symlinkOk
-            puts "Missing files for symlink #{symlink_path} => #{exec_path}. Please reinstall #{package_name}."
-            errors = errors + 1
-          end
+      protected def is_symlink_ok(package_name : String, exec_path : String, symlink_path : String)
+        execOk = File.exists? @config.packages_path / package_name / exec_path
+        symlinkOk = File.exists? @config.bin_path / symlink_path
+
+        if !execOk || !symlinkOk
+          puts "Missing files for symlink #{symlink_path} => #{exec_path}. Please reinstall #{package_name}."
+          return false
         end
 
-        return errors != 0
+        return true
       end
     end
   end

@@ -36,14 +36,19 @@ module Brrr
         Dir.mkdir_p(target_path, 0o755)
       end
 
+      # TODO check if the needed command is available (7z, tar, zip)
       case binary.binary_type
-      when "binary"
+      when BinaryType.binary
         FileUtils.cp([cache_path.to_s], target_path.to_s)
-      when "tar"
+      when BinaryType.mac_dmg
+        output = `7z x #{cache_path} -o#{target_path}`
+      when BinaryType.tar
         output = `tar xf #{cache_path} -C #{target_path}`
-      when "zip"
+      when BinaryType.zip
         output = `unzip #{cache_path} -d #{target_path}`
       end
+
+      # TODO handle error
     end
   end
 end

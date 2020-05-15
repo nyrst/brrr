@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.55.5](https://github.com/nyrst/brrr/releases/tag/v0.55.5)
+
+- :gift: add `brrr outdated` command.
+
 ## [0.34.5](https://github.com/nyrst/brrr/releases/tag/v0.34.5)
 
 - :gift: add `brrr reset` command.

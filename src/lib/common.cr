@@ -1,5 +1,15 @@
+require "semantic_version"
+
 module Brrr
   module Common
+    def self.can_upgrade(latest_version : String, installed_version : String)
+      begin
+        (SemanticVersion.parse(latest_version) <=> SemanticVersion.parse(installed_version)) == 1
+      rescue
+        latest_version > installed_version
+      end
+    end
+
     def self.get_yaml(registry : Api, package_name : String)
       local_path = Path[package_name].expand(Dir.current)
       is_local = registry.is_local_package local_path

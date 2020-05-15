@@ -35,6 +35,10 @@ Examples:
 - To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something.
 - To use a local file, use `brrr install ./something.yaml` to install the `something` package.
 
+#### `brrr outdated`
+
+To list installed packages and next available versions.
+
 #### `brrr upgrade <package names>`
 
 To upgrade everything or a specific package.

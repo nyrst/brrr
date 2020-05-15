@@ -1,4 +1,3 @@
-require "semantic_version"
 require "../lib/common"
 
 module Brrr
@@ -18,14 +17,6 @@ module Brrr
         end
       end
 
-      protected def can_upgrade(latest_version : String, installed_version : String)
-        begin
-          (SemanticVersion.parse(latest_version) <=> SemanticVersion.parse(installed_version)) == 1
-        rescue
-          latest_version > installed_version
-        end
-      end
-
       protected def upgrade(package_name : String)
         # Let's get this package
         yaml = Common.get_yaml(@registry, package_name)
@@ -41,7 +32,7 @@ module Brrr
         installed_version = @config.installed[name]
 
         # If latest version > current version
-        if can_upgrade(latest_version, installed_version)
+        if Common.can_upgrade(latest_version, installed_version)
           puts "Update #{name}: v#{installed_version} => #{latest_version}"
           # Clean package
           Commands::Uninstall.new(@config, @cache, [name])

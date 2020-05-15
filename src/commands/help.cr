@@ -11,6 +11,7 @@ module Brrr
           list                      List the current configuration options.
           set <key> <value>         Set a configuration option.
         install <package names>     Install a package.
+        outdated                    Show installed packages and new available versions.
         upgrade <package names>     Upgrade everything or specific packages.
         uninstall <package names>   Uninstall packages.
 

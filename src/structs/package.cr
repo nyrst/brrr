@@ -51,8 +51,11 @@ module Brrr
 
   struct Package
     YAML.mapping(
-      name: String,
+      brrr: String,
       latest_version: String,
+      name: String,
+      releases_feed: String,
+      tags: Array(String),
       url: String,
       versions: Hash(String, Hash(String, Binary))
     )

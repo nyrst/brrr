@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.5](https://github.com/nyrst/brrr/releases/tag/v0.89.5)
+
+:gift: allow to configure cache and config path with env variables
+
+- `BRRR_CACHE_PATH` for cache directory
+- `BRRR_CONFIG_PATH` for config directory
+
 ## [0.55.5](https://github.com/nyrst/brrr/releases/tag/v0.55.5)
 
 - :gift: add `brrr outdated` command.

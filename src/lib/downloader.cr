@@ -46,6 +46,8 @@ module Brrr
         output = `tar xf #{cache_path} -C #{target_path}`
       when BinaryType.zip
         output = `unzip #{cache_path} -d #{target_path}`
+      else
+        puts "Unknown type: #{binary.binary_type}"
       end
 
       # TODO handle error

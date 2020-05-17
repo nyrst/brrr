@@ -14,6 +14,12 @@ module Brrr
       @home = Path.home
       @filename = "brrr.yaml"
       @path = @home / ".config" / "brrr"
+
+      env_config_dir = ENV["BRRR_CONFIG_PATH"]
+      if !env_config_dir.nil?
+        @path = Path[env_config_dir].expand(home: true)
+      end
+
       @bin_path = @path / "bin"
       @packages_path = @path / "packages"
 

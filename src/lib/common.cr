@@ -1,3 +1,4 @@
+require "file_utils"
 require "semantic_version"
 
 module Brrr

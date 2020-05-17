@@ -3,7 +3,7 @@ all: build
 build: ## Build beulogue
 	shards build
 
-build-release: ## Build beulogue for release
+build-release: test ## Build beulogue for release
 	shards build --release
 
 dev: ## Run in dev mode with reloading
@@ -15,6 +15,8 @@ install: ## Install dependencies for beulogue
 update: ## Update dependencies
 	shards update
 
+test: ## Run tests
+	crystal spec
 
 check-target: ## Check that TARGET is present
 ifndef ARCH

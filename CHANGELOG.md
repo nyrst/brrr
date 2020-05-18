@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.89.8](https://github.com/nyrst/brrr/releases/tag/v0.89.8)
+
+- :bug: fix env variable handling
+
 ## [0.89.5](https://github.com/nyrst/brrr/releases/tag/v0.89.5)
 
 :gift: allow to configure cache and config path with env variables

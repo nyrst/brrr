@@ -10,7 +10,7 @@ module Brrr
       @home = Path.home
       @path = @home / ".cache" / "brrr"
 
-      env_cache_dir = ENV["BRRR_CACHE_PATH"]
+      env_cache_dir = ENV["BRRR_CACHE_PATH"]?
       if !env_cache_dir.nil?
         @path = Path[env_cache_dir].expand(home: true)
       end

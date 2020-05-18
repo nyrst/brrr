@@ -15,7 +15,7 @@ module Brrr
       @filename = "brrr.yaml"
       @path = @home / ".config" / "brrr"
 
-      env_config_dir = ENV["BRRR_CONFIG_PATH"]
+      env_config_dir = ENV["BRRR_CONFIG_PATH"]?
       if !env_config_dir.nil?
         @path = Path[env_config_dir].expand(home: true)
       end

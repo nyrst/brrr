@@ -15,6 +15,12 @@ module Brrr
       def uninstall(name : String)
         # Read installed version
         arch = @config.arch
+
+        if !@config.installed.has_key? name
+          puts "#{name} is not installed."
+          exit 0
+        end
+
         installed_version = @config.installed[name]
 
         puts "Removing #{name} v#{installed_version}"

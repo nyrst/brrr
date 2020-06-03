@@ -1,15 +1,15 @@
 all: build
 
-build: ## Build beulogue
+build: ## Build brrr
 	shards build
 
-build-release: test ## Build beulogue for release
+build-release: test ## Build brrr for release
 	shards build --release
 
 dev: ## Run in dev mode with reloading
 	watchexec -w src make build
 
-install: ## Install dependencies for beulogue
+install: ## Install dependencies for brrr
 	shards install
 
 update: ## Update dependencies

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.144.13](https://github.com/nyrst/brrr/releases/tag/v0.144.13)
+
+- :gift: allow to specify the package version to install
+- :gift: suggest upgrade when installing an already installed package
+- :bug: fix crash on uninstalling a non installed package
+
 ## [0.89.8](https://github.com/nyrst/brrr/releases/tag/v0.89.8)
 
 - :bug: fix env variable handling

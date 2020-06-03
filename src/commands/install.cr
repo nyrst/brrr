@@ -13,7 +13,13 @@ module Brrr
         end
 
         args.each do |package_name|
-          install package_name
+          if package_name.includes? "@"
+            package_name, package_version = package_name.split("@")
+            install(package_name, package_version)
+          else
+            install(package_name, "latest")
+          end
+
           puts ""
         end
       end
@@ -27,7 +33,7 @@ module Brrr
         cache_target_path
       end
 
-      protected def install(package_name : String)
+      protected def install(package_name : String, package_version : String)
         # Let's get this package
         yaml = Common.get_yaml(@registry, package_name)
 
@@ -37,7 +43,12 @@ module Brrr
         cache_package_dir = @cache.path / name
 
         # And check a few things
-        latest_version = package.latest_version
+        latest_version = if package_version == "latest"
+                           package.latest_version
+                         else
+                           package_version
+                         end
+
         if !package.versions.has_key? latest_version
           puts "Version #{latest_version} not found in binaries list."
           return

@@ -13,6 +13,14 @@ module Brrr
         end
 
         args.each do |package_name|
+          if @config.installed.has_key? package_name
+            puts "#{package_name} (version #{@config.installed[package_name]}) is already installed."
+            puts "Try the following command:"
+            puts ""
+            puts "  brrr upgrade #{package_name}"
+            exit 0
+          end
+
           if package_name.includes? "@"
             package_name, package_version = package_name.split("@")
             install(package_name, package_version)

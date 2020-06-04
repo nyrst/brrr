@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.144.21](https://github.com/nyrst/brrr/releases/tag/v0.144.21)
+
+:bug: fix crash on not found package name.
+
 ## [0.144.13](https://github.com/nyrst/brrr/releases/tag/v0.144.13)
 
 - :gift: allow to specify the package version to install

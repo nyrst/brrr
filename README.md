@@ -32,7 +32,7 @@ To install one or more packages.
 
 Examples: 
 
-- To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something.
+- To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something. You can specify the version: `brrr install something@1.0.0`.
 - To use a local file, use `brrr install ./something.yaml` to install the `something` package.
 
 #### `brrr outdated`

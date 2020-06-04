@@ -1,4 +1,5 @@
 require "../lib/common"
+require "../lib/errors"
 require "../lib/downloader"
 require "../lib/registry"
 
@@ -44,6 +45,11 @@ module Brrr
       protected def install(package_name : String, package_version : String)
         # Let's get this package
         yaml = Common.get_yaml(@registry, package_name)
+
+        if yaml.nil?
+          PackageNotFound.log(package_name, @registry.registry)
+          exit 0
+        end
 
         # Now, time to read the package and get some info
         package = Package.from_yaml(yaml)

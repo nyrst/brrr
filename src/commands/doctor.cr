@@ -1,4 +1,5 @@
 require "../lib/common"
+require "../lib/errors"
 
 module Brrr
   module Commands
@@ -54,13 +55,20 @@ module Brrr
 
       protected def download_yaml_and_load(package_name : String)
         yaml = Common.get_yaml(@registry, package_name)
-        package = Package.from_yaml(yaml)
-        name = package.name
-        cache_package_dir = @cache.path / name
 
-        Common.save_yaml(cache_package_dir, name, yaml)
+        if yaml.nil?
+          PackageNotFound.log(package_name, @registry.registry)
+          exit 0
+        else
+          package = Package.from_yaml(yaml)
 
-        package
+          name = package.name
+          cache_package_dir = @cache.path / name
+
+          Common.save_yaml(cache_package_dir, name, yaml)
+
+          package
+        end
       end
 
       protected def get_package_description(yaml : Package, package_name : String, package_version : String)

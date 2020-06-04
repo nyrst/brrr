@@ -12,8 +12,15 @@ module Brrr
     end
 
     def get_package(package : String)
-      response = Halite.follow.get("#{@registry}#{package}.yaml")
-      response.body
+      r = Halite.follow.get("#{@registry}#{package}.yaml")
+
+      begin
+        r.raise_for_status
+        r.body
+      rescue ex : Halite::ClientError | Halite::ServerError
+        # puts "[#{ex.status_code}] #{ex.status_message} (#{ex.class})"
+        nil
+      end
     end
 
     def get_local_package(path : Path)

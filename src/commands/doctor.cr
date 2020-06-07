@@ -11,9 +11,9 @@ module Brrr
           puts "No installed package."
         end
 
-        @config.installed.each do |package_name, package_version|
+        @config.installed.each do |package_name, package_installation|
           puts "Checking #{package_name}..."
-          is_ok = doctor(package_name, package_version)
+          is_ok = doctor(package_name, package_installation)
           if is_ok
             puts "All good!"
           else
@@ -23,6 +23,19 @@ module Brrr
       end
 
       protected def doctor(package_name : String, package_version : String)
+        yaml_installation = <<-YAML
+          url: #{package_name}
+          version: #{package_version}
+        YAML
+        installation = Installation.from_yaml yaml_installation
+
+        doctor(package_name, installation)
+      end
+
+      protected def doctor(package_name : String, package_installation : Installation)
+        package_version = package_installation.version
+        package_url = package_installation.url
+
         # Check if we have the yaml in cache, download it otherwise
         yaml = @cache.read_yaml(package_name)
         package : Package | Nil = nil

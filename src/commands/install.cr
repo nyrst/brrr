@@ -43,6 +43,8 @@ module Brrr
       end
 
       protected def install(package_name : String, package_version : String)
+        Log.debug { "install #{package_name}, version #{package_version}" }
+
         # Let's get this package
         yaml = Common.get_yaml(@registry, package_name)
 
@@ -99,7 +101,12 @@ module Brrr
         end
 
         # Finally, we add the package to our installed packages
-        @config.add_installed_package(name, latest_version)
+        yaml_installation = <<-YAML
+          url: #{package.brrr}
+          version: #{latest_version}
+        YAML
+        installation = Installation.from_yaml yaml_installation
+        @config.add_installed_package(name, installation)
       end
     end
   end

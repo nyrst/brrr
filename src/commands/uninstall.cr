@@ -1,3 +1,5 @@
+require "../structs/package"
+
 module Brrr
   module Commands
     class Uninstall
@@ -14,19 +16,32 @@ module Brrr
 
       def uninstall(name : String)
         # Read installed version
-        arch = @config.arch
 
         if !@config.installed.has_key? name
           puts "#{name} is not installed."
           exit 0
         end
 
-        installed_version = @config.installed[name]
+        run(name, @config.installed[name])
+      end
 
-        puts "Removing #{name} v#{installed_version}"
+      protected def run(package_name : String, package_version : String)
+        yaml_installation = <<-YAML
+          url: #{package_name}
+          version: #{package_version}
+        YAML
+        installation = Installation.from_yaml yaml_installation
+
+        run(package_name, installation)
+      end
+
+      protected def run(package_name : String, installation : Installation)
+        installed_version = installation.version
+
+        puts "Removing #{package_name} v#{installed_version}"
 
         # Read cache yaml
-        package = @cache.read_yaml name
+        package = @cache.read_yaml package_name
 
         if !package.nil?
           if !package.versions.has_key? installed_version
@@ -34,16 +49,17 @@ module Brrr
             return
           end
 
+          arch = @config.arch
           binary = package.versions[installed_version]
           if !binary.has_key? arch
             puts "Binary for arch #{arch} not found."
             return
           end
 
-          @config.uninstall(name, binary[arch])
+          @config.uninstall(package_name, binary[arch])
 
           # Clean cache
-          @cache.uninstall name
+          @cache.uninstall package_name
         end
       end
     end

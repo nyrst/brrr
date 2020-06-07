@@ -5,6 +5,9 @@ authors:
   - Siegfried Ehret <siegfried@ehret.me>
 
 dependencies:
+  dexter:
+    github: luckyframework/dexter
+    version: ~> 0.2
   halite:
     github: icyleaf/halite
 

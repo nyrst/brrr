@@ -1,3 +1,4 @@
+require "log"
 require "option_parser"
 require "./commands/*"
 require "./lib/cache"
@@ -11,8 +12,15 @@ module Brrr
     cache = Cache.new
 
     OptionParser.parse(ARGV) do |opts|
+      opts.on("-v", "--verbose", "Increase the log verbosity, printing all debug statements.") {
+        backend = Log::IOBackend.new
+        Log.dexter.configure(:debug, backend)
+      }
+
       opts.unknown_args do |args, options|
         command = args[0]? || DEFAULT_COMMAND
+
+        Log.debug { "Command: #{command}" }
 
         case command
         when "cache"

@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  dexter:
+    github: luckyframework/dexter
+    version: 0.2.0
+
   halite:
     github: icyleaf/halite
     version: 0.10.5

@@ -1,4 +1,5 @@
 require "file_utils"
+require "../structs/package"
 
 module Brrr
   class Config
@@ -134,8 +135,8 @@ module Brrr
       puts @conf.to_yaml
     end
 
-    def add_installed_package(package : String, version : String)
-      @conf.installed[package] = version
+    def add_installed_package(package : String, installation : Installation)
+      @conf.installed[package] = installation
 
       save
     end

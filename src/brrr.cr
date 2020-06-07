@@ -1,3 +1,4 @@
+require "dexter"
 require "./structs/*"
 require "./cli"
 

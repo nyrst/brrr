@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.233.21](https://github.com/nyrst/brrr/releases/tag/v0.233.21)
+
+- :gift: add support for distributed package definitions
+- :wrench: add logging dependency and add -v flag
+
 ## [0.144.21](https://github.com/nyrst/brrr/releases/tag/v0.144.21)
 
 :bug: fix crash on not found package name.

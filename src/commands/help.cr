@@ -10,6 +10,7 @@ module Brrr
         config
           list                      List the current configuration options.
           set <key> <value>         Set a configuration option.
+        info <package names>        Show information about a package.
         install <package names>     Install a package.
         outdated                    Show installed packages and new available versions.
         upgrade <package names>     Upgrade everything or specific packages.

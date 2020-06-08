@@ -31,10 +31,12 @@ module Brrr
           Commands::Doctor.new(config, cache, args[1..-1])
         when "help"
           Commands::Help.run
+        when "info"
+          Commands::Info.new(config, cache, args[1..-1])
         when "install"
           Commands::Install.new(config, cache, args[1..-1])
         when "outdated"
-          Commands::Outdated.new(config, cache, args[1..-1])
+          Commands::Outdated.new(config, cache)
         when "reset"
           Commands::Reset.new(config, cache)
         when "uninstall"

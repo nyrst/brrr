@@ -26,6 +26,12 @@ The available configuration options are:
 
 - `arch`: supported values are `linux` or `macos`. 
 
+#### `brrr info <package names>`
+
+Show info from repository.
+
+If the package is not installed.
+
 #### `brrr install <package names>`
 
 To install one or more packages.

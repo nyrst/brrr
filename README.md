@@ -1,6 +1,6 @@
 # brrr
 
-`brrr` is the command line tool to install packages from the [freezer](https://github.com/SiegfriedEhret/freezer) repository.
+`brrr` is the command line tool to install packages from the [freezer](https://github.com/SiegfriedEhret/freezer) repository (and more).
 
 ## Installation
 
@@ -28,9 +28,25 @@ The available configuration options are:
 
 #### `brrr info <package names>`
 
-Show info from repository.
+Show info for given package.
 
-If the package is not installed.
+Example, here with `broot` not installed, and `beulogue` previously installed from a custom location:
+
+```
+❯ brrr info atom broot beulogue
+broot
+—————
+Definition: https://nyrst.github.io/freezer/broot.yaml
+Available versions: 0.13.6, 0.14.2
+Latest version: 0.14.2
+
+beulogue
+————————
+Definition: https://github.com/SiegfriedEhret/beulogue/raw/master/brrr.yaml
+Available versions: 3.0.1
+Latest version: 3.0.1
+Installed version: 3.0.1
+```
 
 #### `brrr install <package names>`
 
@@ -40,6 +56,7 @@ Examples:
 
 - To use the [freezer](https://github.com/SiegfriedEhret/freezer) repository, use `brrr install something` to install something. You can specify the version: `brrr install something@1.0.0`.
 - To use a local file, use `brrr install ./something.yaml` to install the `something` package.
+- Since [0.233.21](https://github.com/nyrst/brrr/releases/tag/v0.233.21), `brrr` supports installing package from a different url than the main registry. For example, to install [`beulogue`](https://github.com/SiegfriedEhret/beulogue/), use `brrr install https://raw.githubusercontent.com/SiegfriedEhret/beulogue/master/brrr.yaml`
 
 #### `brrr outdated`
 

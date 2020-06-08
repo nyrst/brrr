@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.377.21](https://github.com/nyrst/brrr/releases/tag/v0.377.21)
+
+- :gift: add `brrr info` command.
+
 ## [0.233.21](https://github.com/nyrst/brrr/releases/tag/v0.233.21)
 
 - :gift: add support for distributed package definitions

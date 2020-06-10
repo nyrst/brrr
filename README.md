@@ -136,6 +136,8 @@ This is absolutely not affiliated with [Nyrst](https://www.youtube.com/watch?v=X
 
 ## Development
 
+Use Crystal 0.35.
+
 ### Contributing
 
 1. Fork it (<https://github.com/SiegfriedEhret/brrr/fork>)

@@ -1,10 +1,10 @@
-version: 1.0
+version: 2.0
 shards:
-  dexter:
-    github: luckyframework/dexter
-    version: 0.2.0
-
   halite:
-    github: icyleaf/halite
+    git: https://github.com/icyleaf/halite.git
     version: 0.10.5
+
+  yaml_mapping:
+    git: https://github.com/crystal-lang/yaml_mapping.cr.git
+    version: 0.1.0+git.commit.732385345b0e39304542bf1b965fb084108e49ca
 

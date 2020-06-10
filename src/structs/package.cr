@@ -1,4 +1,4 @@
-require "yaml"
+require "yaml_mapping"
 
 module Brrr
   struct BinaryType

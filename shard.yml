@@ -5,16 +5,15 @@ authors:
   - Siegfried Ehret <siegfried@ehret.me>
 
 dependencies:
-  dexter:
-    github: luckyframework/dexter
-    version: ~> 0.2
   halite:
     github: icyleaf/halite
+  yaml_mapping:
+    github: crystal-lang/yaml_mapping.cr
 
 targets:
   brrr:
     main: src/brrr.cr
 
-crystal: 0.34.0
+crystal: 0.35.0
 
 license: MIT

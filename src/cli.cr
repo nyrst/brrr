@@ -13,8 +13,7 @@ module Brrr
 
     OptionParser.parse(ARGV) do |opts|
       opts.on("-v", "--verbose", "Increase the log verbosity, printing all debug statements.") {
-        backend = Log::IOBackend.new
-        Log.dexter.configure(:debug, backend)
+        Log.setup :debug
       }
 
       opts.unknown_args do |args, options|

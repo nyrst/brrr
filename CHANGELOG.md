@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.377.55](https://github.com/nyrst/brrr/releases/tag/v0.377.55)
+
+- :bug: show package name when uninstalling
+- :wrench: fix build on macos
+
 ## [0.377.34](https://github.com/nyrst/brrr/releases/tag/v0.377.34)
 
 - :bug: fix display of version when installing something already installed

@@ -7,10 +7,13 @@ ifneq ($(DARWIN),)
 	export PKG_CONFIG_PATH=$(shell printenv PKG_CONFIG_PATH):/usr/local/opt/openssl/lib/pkgconfig
 endif
 
-build: ## Build brrr
+build: clean-bin ## Build brrr
 	shards build
 
-build-release: test ## Build brrr for release
+clean-bin: ## Clean bin folder
+	rm -rf bin
+
+build-release: clean-bin test ## Build brrr for release
 	shards build --release
 
 dev: ## Run in dev mode with reloading
@@ -32,7 +35,7 @@ endif
 
 release-archive: build-release check-target ## Make a tar.gz archive from the binary
 	cd bin ;\
-	tar czf brrr-$(ARCH).tar.gz brrr
+	tar czf brrr-$(ARCH).tar.gz *
 
 help: ## Print this message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'

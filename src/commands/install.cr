@@ -73,6 +73,8 @@ module Brrr
                            package_version
                          end
 
+        puts "Installing #{name} v#{latest_version}"
+
         if !package.versions.has_key? latest_version
           puts "Version #{latest_version} not found in binaries list."
           return
@@ -85,8 +87,6 @@ module Brrr
         end
 
         binary = latest_binary[@config.arch]
-
-        puts "Installing #{name} v#{latest_version}"
 
         # Let's save this yaml
         Common.save_yaml(cache_package_dir, name, yaml)

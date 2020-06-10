@@ -1,5 +1,12 @@
 all: build
 
+OSUPPER = $(shell uname -s 2>/dev/null | tr [:lower:] [:upper:])
+DARWIN = $(strip $(findstring DARWIN, $(OSUPPER)))
+
+ifneq ($(DARWIN),)
+	export PKG_CONFIG_PATH=$(shell printenv PKG_CONFIG_PATH):/usr/local/opt/openssl/lib/pkgconfig
+endif
+
 build: ## Build brrr
 	shards build
 

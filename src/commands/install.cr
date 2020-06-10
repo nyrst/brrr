@@ -15,7 +15,7 @@ module Brrr
 
         args.each do |package_name|
           if @config.installed.has_key? package_name
-            puts "#{package_name} (version #{@config.installed[package_name]}) is already installed."
+            puts "#{package_name} (version #{show_version(@config.installed[package_name])}) is already installed."
             puts "Try the following command:"
             puts ""
             puts "  brrr upgrade #{package_name}"
@@ -31,6 +31,14 @@ module Brrr
 
           puts ""
         end
+      end
+
+      protected def show_version(version : String)
+        version
+      end
+
+      protected def show_version(version : Installation)
+        version.version
       end
 
       protected def download_and_get_target(url : String, cache_package_dir : Path)

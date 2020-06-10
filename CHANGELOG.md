@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.377.34](https://github.com/nyrst/brrr/releases/tag/v0.377.34)
+
+- :bug: fix display of version when installing something already installed
+- :wrench: upgrade for crystal 0.35, use std log instead of dexter
+
 ## [0.377.21](https://github.com/nyrst/brrr/releases/tag/v0.377.21)
 
 - :gift: add `brrr info` command.

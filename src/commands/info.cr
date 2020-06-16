@@ -4,6 +4,10 @@ module Brrr
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
         @registry = Api.new nil
 
+        if args.size == 0
+          puts "Nothing to do."
+        end
+
         args.each do |package_name|
           info(package_name, if @config.installed.has_key? package_name
             @config.installed[package_name]

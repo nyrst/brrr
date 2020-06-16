@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.610.55](https://github.com/nyrst/brrr/releases/tag/v0.610.55)
+
+- :wrench: remove yaml_mapping
+- :gift: show upgrade command for outdated packages
+- :gift: add a message to brrr info when there is nothing to do
+
+Also, add a few aliases:
+
+- help: "h", "help"
+- install: "add", "i", "install"
+- uninstall: "remove", "rm", "u", "uninstall"
+- upgrade: "up", "upgrade"
+- version: "v", "version"
+
 ## [0.377.55](https://github.com/nyrst/brrr/releases/tag/v0.377.55)
 
 - :bug: show package name when uninstalling

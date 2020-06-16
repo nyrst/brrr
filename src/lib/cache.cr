@@ -1,5 +1,4 @@
 require "file_utils"
-require "yaml_mapping"
 
 module Brrr
   class Cache

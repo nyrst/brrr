@@ -1,4 +1,4 @@
-require "yaml_mapping"
+require "yaml"
 
 module Brrr
   struct BinaryType
@@ -30,34 +30,31 @@ module Brrr
   end
 
   struct PostInstall
-    YAML.mapping(
-      type: String,
+    include YAML::Serializable
+    property type : String
 
-      # Needed for move and symlink.
-      source: String,
-      target: String
-    )
+    # Needed for move and symlink.
+    property source : String
+    property target : String
   end
 
   struct Binary
-    YAML.mapping(
-      binary_type: String,
-      hash_sha1: String?,
-      hash_md5: String?,
-      post_install: Array(PostInstall),
-      url: String
-    )
+    include YAML::Serializable
+    property binary_type : String
+    property hash_sha1 : String?
+    property hash_md5 : String?
+    property post_install : Array(PostInstall)
+    property url : String
   end
 
   struct Package
-    YAML.mapping(
-      brrr: String,
-      latest_version: String,
-      name: String,
-      releases_feed: String,
-      tags: Array(String),
-      url: String,
-      versions: Hash(String, Hash(String, Binary))
-    )
+    include YAML::Serializable
+    property brrr : String
+    property latest_version : String
+    property name : String
+    property releases_feed : String
+    property tags : Array(String)
+    property url : String
+    property versions : Hash(String, Hash(String, Binary))
   end
 end

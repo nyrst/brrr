@@ -1,17 +1,15 @@
-require "yaml_mapping"
+require "yaml"
 
 module Brrr
   struct Installation
-    YAML.mapping(
-      url: String,
-      version: String
-    )
+    include YAML::Serializable
+    property url : String
+    property version : String
   end
 
   struct BrrrConfig
-    YAML.mapping(
-      arch: String,
-      installed: Hash(String, String | Installation)
-    )
+    include YAML::Serializable
+    property arch : String
+    property installed : Hash(String, String | Installation)
   end
 end

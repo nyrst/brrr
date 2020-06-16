@@ -7,8 +7,6 @@ authors:
 dependencies:
   halite:
     github: icyleaf/halite
-  yaml_mapping:
-    github: crystal-lang/yaml_mapping.cr
 
 targets:
   brrr:

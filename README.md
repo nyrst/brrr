@@ -58,6 +58,8 @@ Examples:
 - To use a local file, use `brrr install ./something.yaml` to install the `something` package.
 - Since [0.233.21](https://github.com/nyrst/brrr/releases/tag/v0.233.21), `brrr` supports installing package from a different url than the main registry. For example, to install [`beulogue`](https://github.com/SiegfriedEhret/beulogue/), use `brrr install https://raw.githubusercontent.com/SiegfriedEhret/beulogue/master/brrr.yaml`
 
+Aliases: `add`, `i`
+
 #### `brrr outdated`
 
 To list installed packages and next available versions.
@@ -69,9 +71,13 @@ To upgrade everything or a specific package.
 - Use `brrr upgrade` to start the upgrade process on all your packages.
 - Use `brrr <package names>` to start the upgrade process on given packages.
 
+Alias: `up`
+
 #### `brrr uninstall <package names>`
 
 The opposite of `install`!
+
+Aliases: `remove`, `rm`, `u`, `uninstall`
 
 ### Utility commands
 
@@ -91,6 +97,9 @@ To find what is wrong in your brrr files.
 
 To display some help with the available commands.
 
+
+Alias: `h`
+
 #### `brrr reset`
 
 Remove all installed packages (like `uninstall` but shorter).
@@ -98,6 +107,8 @@ Remove all installed packages (like `uninstall` but shorter).
 #### `brrr version`
 
 To display the current version.
+
+Alias: `v`
 
 ## Cache and configuration
 

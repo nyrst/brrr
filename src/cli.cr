@@ -12,9 +12,12 @@ module Brrr
     cache = Cache.new
 
     OptionParser.parse(ARGV) do |opts|
-      opts.on("-v", "--verbose", "Increase the log verbosity, printing all debug statements.") {
+      opts.on("-h", "--help", "Show this help") do
+        Commands::Help.run
+      end
+      opts.on("-v", "--verbose", "Increase the log verbosity, printing all debug statements.") do
         Log.setup :debug
-      }
+      end
 
       opts.unknown_args do |args, options|
         command = args[0]? || DEFAULT_COMMAND
@@ -28,21 +31,21 @@ module Brrr
           Commands::Configure.new(config, args[1..-1])
         when "doctor"
           Commands::Doctor.new(config, cache, args[1..-1])
-        when "help"
+        when "h", "help"
           Commands::Help.run
         when "info"
           Commands::Info.new(config, cache, args[1..-1])
-        when "install"
+        when "add", "i", "install"
           Commands::Install.new(config, cache, args[1..-1])
         when "outdated"
           Commands::Outdated.new(config, cache)
         when "reset"
           Commands::Reset.new(config, cache)
-        when "uninstall"
+        when "remove", "rm", "u", "uninstall"
           Commands::Uninstall.new(config, cache, args[1..-1])
-        when "upgrade"
+        when "up", "upgrade"
           Commands::Upgrade.new(config, cache, args[1..-1])
-        when "version"
+        when "v", "version"
           Commands::Version.run
         else
           puts "Unknown command: #{command}"

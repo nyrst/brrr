@@ -7,9 +7,20 @@ module Brrr
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache)
         @registry = Api.new nil
 
+        packages_to_update = Array(String).new
+
         # List installed packages
         @config.installed.each do |package_name, package_installation|
-          outdated(package_name, package_installation)
+          if outdated(package_name, package_installation)
+            packages_to_update << package_name
+          end
+        end
+
+        if packages_to_update.size > 0
+          puts ""
+          puts "To upgrade, run:"
+          puts ""
+          puts "  brrr upgrade #{packages_to_update.join(" ")}"
         end
       end
 
@@ -41,13 +52,17 @@ module Brrr
           all_versions = package.versions.keys
           next_versions = all_versions.select { |v| Common.can_upgrade(v, current_version) }
 
-          next_text = if next_versions.size > 0
+          has_next_version = next_versions.size > 0
+
+          next_text = if has_next_version
                         "Available version(s): #{next_versions.sort.join(", ")}"
                       else
                         "You already have the latest version."
                       end
 
           puts "#{package_name} (#{current_version}). #{next_text}"
+
+          has_next_version
         end
       end
     end

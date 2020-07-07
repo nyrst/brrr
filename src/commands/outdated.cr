@@ -9,9 +9,11 @@ module Brrr
 
         packages_to_update = Array(String).new
 
-        # List installed packages
-        @config.installed.each do |package_name, package_installation|
-          if outdated(package_name, package_installation)
+        packages = @config.installed.keys.sort
+
+        packages.each do |package_name|
+          package_installation = @config.installed[package_name]
+          if !package_installation.nil? && outdated(package_name, package_installation)
             packages_to_update << package_name
           end
         end

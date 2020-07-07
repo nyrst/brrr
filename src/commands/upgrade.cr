@@ -9,7 +9,7 @@ module Brrr
         @registry = Api.new nil
 
         package_to_update = if args.size == 0
-                              @config.installed.keys
+                              @config.installed.keys.sort
                             else
                               args
                             end

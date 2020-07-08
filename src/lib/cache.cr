@@ -1,4 +1,5 @@
 require "file_utils"
+require "../structs/package"
 
 module Brrr
   class Cache

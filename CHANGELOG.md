@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.610.89](https://github.com/nyrst/brrr/releases/tag/v0.610.89)
+
+- :gift: order packages by name in brrr outdated and brrr upgrade
+
 ## [0.610.55](https://github.com/nyrst/brrr/releases/tag/v0.610.55)
 
 - :wrench: remove yaml_mapping

@@ -5,7 +5,7 @@ module Brrr
         @registry = Api.new nil
 
         if args.size == 0
-          puts "Nothing to do."
+          puts "❄️ Nothing to do."
         end
 
         args.each do |package_name|

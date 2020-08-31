@@ -54,7 +54,7 @@ module Brrr
 
         # If latest version > current version
         if Common.can_upgrade(latest_version, current_version)
-          puts "Update #{package_name}: v#{current_version} => #{latest_version}"
+          puts "⛄ Update #{package_name}: v#{current_version} => #{latest_version}"
           # Clean package
           Commands::Uninstall.new(@config, @cache, [package_name])
 
@@ -62,7 +62,7 @@ module Brrr
           # Save new version
           Commands::Install.new(@config, @cache, [package_name])
         else
-          puts "#{package_name} v#{current_version} is up to date."
+          puts "❄️ #{package_name} v#{current_version} is up to date."
         end
       end
     end

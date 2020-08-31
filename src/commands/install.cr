@@ -73,16 +73,16 @@ module Brrr
                            package_version
                          end
 
-        puts "Installing #{name} v#{latest_version}"
+        puts "⛄ Installing #{name} v#{latest_version}"
 
         if !package.versions.has_key? latest_version
-          puts "Version #{latest_version} not found in binaries list."
+          puts "❄️ Version #{latest_version} not found in binaries list."
           return
         end
 
         latest_binary = package.versions[latest_version]
         if !latest_binary.has_key? @config.arch
-          puts "Binary for arch #{@config.arch} not found. Available archs are: #{latest_binary.keys.join(",")}"
+          puts "❄️ Binary for arch #{@config.arch} not found. Available archs are: #{latest_binary.keys.join(",")}"
           return
         end
 
@@ -97,7 +97,7 @@ module Brrr
 
         # Let's verify the hash (check if present is in the `verify` function)
         if !Downloader.verify(cache_target_path, binary)
-          puts "Failed to verify checksum for file #{cache_target_path}."
+          puts "❄️ Failed to verify checksum for file #{cache_target_path}."
           return
         end
 
@@ -115,6 +115,8 @@ module Brrr
         YAML
         installation = Installation.from_yaml yaml_installation
         @config.add_installed_package(name, installation)
+
+        puts "☃️ #{name} v#{latest_version} installed successfully!"
       end
     end
   end

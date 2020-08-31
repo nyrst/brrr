@@ -101,7 +101,12 @@ module Brrr
       protected def is_moved_ok
       end
 
-      protected def is_symlink_ok(package_name : String, exec_path : String, symlink_path : String)
+      protected def is_symlink_ok(package_name : String, exec_path : String?, symlink_path : String?)
+        if exec_path.nil? || symlink_path.nil?
+          puts "Wrong symlink for package #{package_name} (#{symlink_path} -> #{exec_path})"
+          return false
+        end
+
         execOk = File.exists? @config.packages_path / package_name / exec_path
         symlinkOk = File.exists? @config.bin_path / symlink_path
 

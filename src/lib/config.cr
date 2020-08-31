@@ -60,12 +60,40 @@ module Brrr
     def post_install(package : String, scripts : Array(PostInstall))
       scripts.each do |script|
         case script.type
+        when PostInstallType.echo
+          message = script.message
+
+          if !message.nil?
+            puts "\n  #{message}\n"
+          end
         when PostInstallType.move
           source = script.source
           target = script.target
 
           if !source.nil? && !target.nil?
             move(package, source, target)
+          end
+        when PostInstallType.run
+          command = script.command
+          if !command.nil?
+            io_err = IO::Memory.new
+            io_in = IO::Memory.new
+            io_out = IO::Memory.new
+
+            puts "\n❄️ Running #{command}\n\n"
+
+            Process.new(command, nil, nil, false, true, io_in, io_out, io_err).wait
+
+            log_err = io_err.to_s
+            log_out = io_out.to_s
+
+            if log_err.size > 0
+              puts "❄️ // An error occured while running #{command}"
+              puts log_err
+              puts "❄️ // End of error"
+            else
+              puts log_out
+            end
           end
         when PostInstallType.symlink
           source = script.source
@@ -75,7 +103,7 @@ module Brrr
             link(package, source, target)
           end
         else
-          puts "Unknown script command: #{script.type}."
+          puts "❄️ Unknown script command: #{script.type}."
         end
       end
     end
@@ -84,9 +112,17 @@ module Brrr
       scripts.each do |script|
         case script.type
         when PostInstallType.move
-          FileUtils.rm_rf (bin_path / script.target).to_s
+          target = script.target
+          if !target.nil?
+            FileUtils.rm_rf (bin_path / target).to_s
+          end
         when PostInstallType.symlink
-          FileUtils.rm_rf (bin_path / script.target).to_s
+          target = script.target
+          if !target.nil?
+            FileUtils.rm_rf (bin_path / target).to_s
+          end
+        when PostInstallType.echo
+        when PostInstallType.run
         else
           puts "Unknown script command: #{script.type}."
         end

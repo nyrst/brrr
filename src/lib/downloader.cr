@@ -7,7 +7,12 @@ module Brrr
       response = HTTP::Client.get url
 
       Halite.follow.get(url) do |response|
+        content_length = response.content_length
         # TODO response.status_code  # => 200
+        puts "Downloading #{url}"
+        if !content_length.nil?
+          puts "File size: #{content_length.humanize_bytes}"
+        end
         File.write(target, response.body_io)
       end
     end
@@ -30,7 +35,7 @@ module Brrr
     end
 
     def self.extract(cache_path : Path, binary : Brrr::Binary, target_path : Path)
-      puts "Extract #{cache_path} to #{target_path}"
+      Log.debug { "Extract #{cache_path} to #{target_path}" }
 
       if !Dir.exists? target_path
         Dir.mkdir_p(target_path, 0o755)

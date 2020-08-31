@@ -23,6 +23,8 @@ module Brrr
         doctor                      Check the sanity of your installed packages.
         help                        Show help (alias: h)
         version                     Print the current version of brrr (alias: v).
+
+      With ❄️.
      HELP
 
         exit 0

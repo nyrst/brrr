@@ -20,8 +20,16 @@ module Brrr
   end
 
   struct PostInstallType
+    def self.echo
+      "echo"
+    end
+
     def self.move
       "move"
+    end
+
+    def self.run
+      "run"
     end
 
     def self.symlink
@@ -34,8 +42,14 @@ module Brrr
     property type : String
 
     # Needed for move and symlink.
-    property source : String
-    property target : String
+    property source : String?
+    property target : String?
+
+    # For echo message
+    property message : String?
+
+    # For run command
+    property command : String?
   end
 
   struct Binary

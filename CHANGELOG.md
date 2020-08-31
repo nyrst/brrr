@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.987.89](https://github.com/nyrst/brrr/releases/tag/v0.987.89)
+
+- :gift: add `echo` (with a `message`) type for scripts to display a message
+- :gift: add `run` (with a `command`) type for script to run a command
+- :gift: update some logs for snowy messages :snowflake:
+
 ## [0.610.89](https://github.com/nyrst/brrr/releases/tag/v0.610.89)
 
 - :gift: order packages by name in brrr outdated and brrr upgrade

@@ -31,6 +31,8 @@ module Brrr
           Commands::Configure.new(config, args[1..-1])
         when "doctor"
           Commands::Doctor.new(config, cache, args[1..-1])
+        when "freezer"
+          Commands::Freezer.new(args[1..-1])
         when "h", "help"
           Commands::Help.run
         when "info"
@@ -48,7 +50,9 @@ module Brrr
         when "v", "version"
           Commands::Version.run
         else
-          puts "Unknown command: #{command}"
+          Logger.log "Unknown command: #{command}\n\n"
+          Commands::Help.run
+          exit 0
         end
       end
     end

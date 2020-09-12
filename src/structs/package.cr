@@ -1,3 +1,4 @@
+require "json"
 require "yaml"
 
 module Brrr
@@ -38,6 +39,7 @@ module Brrr
   end
 
   struct PostInstall
+    include JSON::Serializable
     include YAML::Serializable
     property type : String
 
@@ -53,6 +55,7 @@ module Brrr
   end
 
   struct Binary
+    include JSON::Serializable
     include YAML::Serializable
     property binary_type : String
     property hash_sha1 : String?
@@ -62,6 +65,7 @@ module Brrr
   end
 
   struct Package
+    include JSON::Serializable
     include YAML::Serializable
     property brrr : String
     property latest_version : String

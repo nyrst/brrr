@@ -24,7 +24,7 @@ module Brrr
         help                        Show help (alias: h)
         version                     Print the current version of brrr (alias: v).
 
-      With ❄️.
+      With ❄️, peace.
      HELP
 
         exit 0

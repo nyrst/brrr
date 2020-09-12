@@ -80,7 +80,9 @@ module Brrr
             io_in = IO::Memory.new
             io_out = IO::Memory.new
 
-            puts "\n❄️ Running #{command}\n\n"
+            puts "\n"
+            Logger.log "Running #{command}"
+            puts "\n\n"
 
             Process.new(command, nil, nil, false, true, io_in, io_out, io_err).wait
 
@@ -88,9 +90,9 @@ module Brrr
             log_out = io_out.to_s
 
             if log_err.size > 0
-              puts "❄️ An error occured while running #{command}"
+              Logger.log "An error occured while running #{command}"
               puts log_err
-              puts "❄️ End of error"
+              Logger.log "End of error"
             else
               puts log_out
             end
@@ -103,7 +105,7 @@ module Brrr
             link(package, source, target)
           end
         else
-          puts "❄️ Unknown script command: #{script.type}."
+          Logger.log "Unknown script command: #{script.type}."
         end
       end
     end
@@ -124,7 +126,7 @@ module Brrr
         when PostInstallType.echo
         when PostInstallType.run
         else
-          puts "❄️ Unknown script command: #{script.type}."
+          Logger.log "Unknown script command: #{script.type}."
         end
       end
     end
@@ -140,11 +142,11 @@ module Brrr
                end
 
       if File.exists? source
-        puts "❄️ Linking #{source} to #{target}"
+        Logger.log "Linking #{source} to #{target}"
         File.chmod(source, 0o755)
         FileUtils.ln_sf(source.to_s, target.to_s)
       else
-        puts "❄️ Failed to link #{source} to #{target}"
+        Logger.log "Failed to link #{source} to #{target}"
       end
     end
 
@@ -159,10 +161,10 @@ module Brrr
            end
 
       if File.exists? source
-        puts "❄️ Moving #{source} to #{to}"
+        Logger.log "Moving #{source} to #{to}"
         FileUtils.mv([source.to_s], to.to_s)
       else
-        puts "❄️ Failed to move #{source} to #{to}"
+        Logger.log "Failed to move #{source} to #{to}"
       end
     end
 

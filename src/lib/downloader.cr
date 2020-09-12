@@ -9,9 +9,9 @@ module Brrr
       Halite.follow.get(url) do |response|
         content_length = response.content_length
         # TODO response.status_code  # => 200
-        puts "❄️ Downloading #{url}"
+        Logger.log "Downloading #{url}"
         if !content_length.nil?
-          puts "❄️ File size: #{content_length.humanize_bytes}"
+          Logger.log "File size: #{content_length.humanize_bytes}"
         end
         File.write(target, response.body_io)
       end
@@ -52,7 +52,7 @@ module Brrr
       when BinaryType.zip
         output = `unzip #{cache_path} -d #{target_path}`
       else
-        puts "❄️ Unknown type: #{binary.binary_type}"
+        Logger.log "Unknown type: #{binary.binary_type}"
       end
 
       # TODO handle error

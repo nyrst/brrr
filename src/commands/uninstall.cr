@@ -5,7 +5,7 @@ module Brrr
     class Uninstall
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
         if args.size == 0
-          puts "❄️ Nothing to do."
+          Logger.log "Nothing to do."
         end
 
         args.each do |name|
@@ -18,7 +18,7 @@ module Brrr
         # Read installed version
 
         if !@config.installed.has_key? name
-          puts "❄️ #{name} is not installed."
+          Logger.log "#{name} is not installed."
           exit 0
         end
 
@@ -38,21 +38,21 @@ module Brrr
       protected def run(package_name : String, installation : Installation)
         installed_version = installation.version
 
-        puts "⛄ Removing #{package_name} v#{installed_version}"
+        Logger.start "Removing #{package_name} v#{installed_version}"
 
         # Read cache yaml
         package = @cache.read_yaml package_name
 
         if !package.nil?
           if !package.versions.has_key? installed_version
-            puts "❄️ Version #{installed_version} not found."
+            Logger.log "Version #{installed_version} not found."
             return
           end
 
           arch = @config.arch
           binary = package.versions[installed_version]
           if !binary.has_key? arch
-            puts "❄️ Binary for arch #{arch} not found."
+            Logger.log "Binary for arch #{arch} not found."
             return
           end
 
@@ -61,7 +61,7 @@ module Brrr
           # Clean cache
           @cache.uninstall package_name
 
-          puts "☃️ #{package_name} v#{installed_version} removed successfully!"
+          Logger.end "#{package_name} v#{installed_version} removed successfully!"
         end
       end
     end

@@ -144,23 +144,3 @@ I spend a lot of time looking for a name around the themes of "cold", "ice", "no
 I came into the word `nyrst` totally randomly.
 
 This is absolutely not affiliated with [Nyrst](https://www.youtube.com/watch?v=X7KqqGRe8-I), a black metal band from Iceland. They have a [bandcamp page](https://nyrst.bandcamp.com/). Check them out!
-
-## Development
-
-Use Crystal 0.35.
-
-### Contributing
-
-1. Fork it (<https://github.com/SiegfriedEhret/brrr/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
-
-### Contributors
-
-- [Siegfried Ehret](https://github.com/SiegfriedEhret) - creator and maintainer
-
-### License
-
-This library is distributed under the MIT license. Please see the [LICENSE](./LICENSE) file.

@@ -6,10 +6,10 @@ module Brrr
     def self.get_file(url : String, target : Path)
       response = HTTP::Client.get url
 
+      Logger.log "Downloading #{url}"
       Halite.follow.get(url) do |response|
         content_length = response.content_length
         # TODO response.status_code  # => 200
-        Logger.log "Downloading #{url}"
         if !content_length.nil?
           Logger.log "File size: #{content_length.humanize_bytes}"
         end

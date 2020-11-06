@@ -12,6 +12,6 @@ targets:
   brrr:
     main: src/brrr.cr
 
-crystal: 0.35.0
+crystal: 0.35.1
 
 license: MIT

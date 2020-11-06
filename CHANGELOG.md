@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1597.89](https://github.com/nyrst/brrr/releases/tag/v0.1597.89)
+
+- :gift: add list command
+- refactor a few things
+
 ## [0.987.89](https://github.com/nyrst/brrr/releases/tag/v0.987.89)
 
 - :gift: add `echo` (with a `message`) type for scripts to display a message

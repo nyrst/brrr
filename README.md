@@ -60,6 +60,12 @@ Examples:
 
 Aliases: `add`, `i`
 
+#### `brrr list`
+
+To list the available packages for the configured architecture (linux or macos).
+
+Alias: `ls`
+
 #### `brrr outdated`
 
 To list installed packages and next available versions.

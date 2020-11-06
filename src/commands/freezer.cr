@@ -1,28 +1,38 @@
 require "../lib/common"
+require "../structs/freezer"
 
 module Brrr
   module Commands
     class Freezer
-      def initialize(args : Array(String))
-        @registry = Api.new nil
+      def initialize(@config : Brrr::Config, args : Array(String))
+        @repository = Repository.new @config.repository
 
         if args.size == 0
           Logger.start "Nothing to do."
+          return
         end
 
         command = args[0]
 
-        if command == "generate_web_data"
-          generate_web_data
+        if command == "help"
+          help
+        elsif command == "generate"
+          data = get_data
+          build_apps data
+          build_archs data
         else
-          Logger.log "Available commands: help, generate_web_data"
+          help
         end
       end
 
-      def generate_web_data
+      def help
+        Logger.log "Available commands: generate, help"
+      end
+
+      def get_data
         cwd = Dir.current
 
-        folder = Path[cwd] / "public"
+        folder = Path[cwd] / "data"
         if Dir.exists?(folder)
           FileUtils.rm_rf folder.to_s
         end
@@ -32,7 +42,7 @@ module Brrr
         entries = Dir.entries(cwd)
           .select { |e| e.ends_with? ".yaml" }
           .map do |e|
-            yaml = Common.get_yaml(@registry, e)
+            yaml = Common.get_yaml(@repository, e)
 
             if !yaml.nil?
               # Now, time to read the package and get some info
@@ -41,24 +51,36 @@ module Brrr
           end
           .reject(Nil)
 
-        generate_apps(folder, entries)
-
-        generate_web_tags(folder, entries)
+        FreezerData.new(folder, entries)
       end
 
-      private def generate_apps(folder : Path, entries : Array(Brrr::Package))
-        apps = entries
-          .map do |e|
-            item = Hash(String, String | Array(String)).new
-            item["brrr"] = e.brrr
-            item["name"] = e.name
-            item["latest_version"] = e.latest_version
-            item["tags"] = e.tags
-            item["arch"] = e.versions[e.latest_version].keys
-            item
-          end
+      private def build_apps(data : FreezerData)
+        apps = data.entries
+          .map { |e| to_hash(e, true) }
 
-        File.write(folder / "apps.json", apps.to_json)
+        File.write(data.folder / "apps.json", apps.to_json)
+      end
+
+      private def build_archs(data : FreezerData)
+        ["linux", "macos"].map do |arch|
+          apps = data.entries
+            .select { |e| e.versions[e.latest_version].has_key? arch }
+            .map { |e| to_hash(e, false) }
+
+          File.write(data.folder / "apps-#{arch}.json", apps.to_json)
+        end
+      end
+
+      private def to_hash(e : Brrr::Package, includes_archs : Bool)
+        item = Hash(String, String | Array(String)).new
+        # item["brrr"] = e.brrr
+        item["name"] = e.name
+        item["latest_version"] = e.latest_version
+        # item["tags"] = e.tags
+        if includes_archs
+          item["archs"] = e.versions[e.latest_version].keys
+        end
+        item
       end
 
       private def generate_web_tags(folder : Path, entries : Array(Brrr::Package))

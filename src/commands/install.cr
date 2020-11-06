@@ -1,13 +1,13 @@
 require "../lib/common"
 require "../lib/errors"
 require "../lib/downloader"
-require "../lib/registry"
+require "../lib/repository"
 
 module Brrr
   module Commands
     class Install
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
-        @registry = Api.new nil
+        @repository = Repository.new @config.repository
 
         if args.size == 0
           puts "Nothing to do."
@@ -54,10 +54,10 @@ module Brrr
         Log.debug { "install #{package_name}, version #{package_version}" }
 
         # Let's get this package
-        yaml = Common.get_yaml(@registry, package_name)
+        yaml = Common.get_yaml(@repository, package_name)
 
         if yaml.nil?
-          PackageNotFound.log(package_name, @registry.registry)
+          PackageNotFound.log(package_name, @repository.repository)
           exit 0
         end
 

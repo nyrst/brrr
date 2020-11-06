@@ -12,6 +12,7 @@ module Brrr
           set <key> <value>         Set a configuration option.
         info <package names>        Show information about a package.
         install <package names>     Install a package (aliases: add, i).
+        list                        Show the list of packages for the configured architecture.
         outdated                    Show installed packages and new available versions.
         upgrade <package names>     Upgrade everything or specific packages (alias: up).
         uninstall <package names>   Uninstall packages (aliases: remove, rm, u).

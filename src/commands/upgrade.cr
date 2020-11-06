@@ -6,7 +6,7 @@ module Brrr
   module Commands
     class Upgrade
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
-        @registry = Api.new nil
+        @repository = Repository.new @config.repository
 
         package_to_update = if args.size == 0
                               @config.installed.keys.sort
@@ -39,7 +39,7 @@ module Brrr
         current_version = package_installation.version
 
         # Let's get this package
-        yaml = Common.get_yaml(@registry, package_url)
+        yaml = Common.get_yaml(@repository, package_url)
 
         if yaml.nil?
           PackageNotFound.log(package_name, package_url)

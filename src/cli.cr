@@ -32,13 +32,15 @@ module Brrr
         when "doctor"
           Commands::Doctor.new(config, cache, args[1..-1])
         when "freezer"
-          Commands::Freezer.new(args[1..-1])
+          Commands::Freezer.new(config, args[1..-1])
         when "h", "help"
           Commands::Help.run
         when "info"
           Commands::Info.new(config, cache, args[1..-1])
         when "add", "i", "install"
           Commands::Install.new(config, cache, args[1..-1])
+        when "list", "ls"
+          Commands::List.new(config)
         when "outdated"
           Commands::Outdated.new(config, cache)
         when "reset"

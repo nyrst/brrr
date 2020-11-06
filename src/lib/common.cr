@@ -11,16 +11,16 @@ module Brrr
       end
     end
 
-    def self.get_yaml(registry : Api, package : String)
+    def self.get_yaml(repository : Repository, package : String)
       local_path = Path[package].expand(Dir.current)
-      is_local = registry.is_local_package local_path
+      is_local = repository.is_local_package local_path
 
       if is_local
         Log.debug { "Common::get_yaml local #{local_path}" }
-        registry.get_local_package local_path
+        repository.get_local_package local_path
       else
         Log.debug { "Common::get_yaml distant #{package}" }
-        registry.get_package package
+        repository.get_package package
       end
     end
 

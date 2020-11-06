@@ -5,7 +5,7 @@ module Brrr
   module Commands
     class Doctor
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
-        @registry = Api.new nil
+        @repository = Repository.new @config.repository
 
         if @config.installed.size == 0
           puts "No installed package."
@@ -67,10 +67,10 @@ module Brrr
       end
 
       protected def download_yaml_and_load(package_name : String)
-        yaml = Common.get_yaml(@registry, package_name)
+        yaml = Common.get_yaml(@repository, package_name)
 
         if yaml.nil?
-          PackageNotFound.log(package_name, @registry.registry)
+          PackageNotFound.log(package_name, @repository.repository)
           exit 0
         else
           package = Package.from_yaml(yaml)

@@ -2,7 +2,7 @@ module Brrr
   module Commands
     class Info
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache, args : Array(String))
-        @registry = Api.new nil
+        @repository = Repository.new @config.repository
 
         if args.size == 0
           Logger.log "Nothing to do."
@@ -39,10 +39,10 @@ module Brrr
         package_url = package_installation.url
         installed_version = package_installation.version
 
-        yaml = Common.get_yaml(@registry, package_url)
+        yaml = Common.get_yaml(@repository, package_url)
 
         if yaml.nil?
-          PackageNotFound.log(package_name, @registry.registry)
+          PackageNotFound.log(package_name, @repository.repository)
           exit 0
         else
           package = Package.from_yaml(yaml)

@@ -10,6 +10,7 @@ module Brrr
   struct BrrrConfig
     include YAML::Serializable
     property arch : String
+    property repository : String?
     property installed : Hash(String, String | Installation)
   end
 end

@@ -53,6 +53,10 @@ module Brrr
       @conf.arch
     end
 
+    def repository
+      @conf.repository
+    end
+
     def installed
       @conf.installed
     end
@@ -194,6 +198,11 @@ module Brrr
     def set(key : String, value : String)
       if key == "arch"
         @conf.arch = value
+      elsif key == "repository"
+        @conf.repository = value
+      else
+        puts "Unsupported key: #{key}"
+        return
       end
 
       save

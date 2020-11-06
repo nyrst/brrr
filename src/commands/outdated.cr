@@ -5,7 +5,7 @@ module Brrr
   module Commands
     class Outdated
       def initialize(@config : Brrr::Config, @cache : Brrr::Cache)
-        @registry = Api.new nil
+        @repository = Repository.new @config.repository
 
         packages_to_update = Array(String).new
 
@@ -41,10 +41,10 @@ module Brrr
         current_version = package_installation.version
 
         # Let's get this package
-        yaml = Common.get_yaml(@registry, package_url)
+        yaml = Common.get_yaml(@repository, package_url)
 
         if yaml.nil?
-          PackageNotFound.log(package_name, @registry.registry)
+          PackageNotFound.log(package_name, @repository.repository)
           exit 0
         else
           # Now, time to read the package and get some info

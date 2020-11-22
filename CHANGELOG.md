@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2584.89](https://github.com/nyrst/brrr/releases/tag/v0.2584.89)
+
+- :gift: extract script commands, allow to specify working dir for "run"
+- :whale: build static binary with docker
+
 ## [0.1597.89](https://github.com/nyrst/brrr/releases/tag/v0.1597.89)
 
 - :gift: add list command

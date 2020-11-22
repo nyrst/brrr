@@ -135,7 +135,11 @@ If needed, the cache and config directories can be set using environment variabl
 **How to list available packages?**
 
 The package list is available on [Freezer](https://github.com/nyrst/freezer).
-I have a few things to make package discovery a nice experience.
+
+Here are few things to make package discovery a nice experience:
+
+- The package list on [nyrst.tools](https://nyrst.tools/apps)
+- Run `brrr ls` (or `brrr list`)
 
 **Why this?**
 

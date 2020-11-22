@@ -52,6 +52,7 @@ module Brrr
 
     # For run command
     property command : String?
+    property working_directory : String?
   end
 
   struct Binary

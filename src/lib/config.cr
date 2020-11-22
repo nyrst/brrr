@@ -1,5 +1,6 @@
 require "file_utils"
 require "../structs/package"
+require "./scripts/*"
 
 module Brrr
   class Config
@@ -65,49 +66,13 @@ module Brrr
       scripts.each do |script|
         case script.type
         when PostInstallType.echo
-          message = script.message
-
-          if !message.nil?
-            puts "\n  #{message}\n"
-          end
+          Script::Echo.new.on_install(package, script)
         when PostInstallType.move
-          source = script.source
-          target = script.target
-
-          if !source.nil? && !target.nil?
-            move(package, source, target)
-          end
+          Script::Move.new(@packages_path, @bin_path).on_install(package, script)
         when PostInstallType.run
-          command = script.command
-          if !command.nil?
-            io_err = IO::Memory.new
-            io_in = IO::Memory.new
-            io_out = IO::Memory.new
-
-            puts "\n"
-            Logger.log "Running #{command}"
-            puts "\n\n"
-
-            Process.new(command, nil, nil, false, true, io_in, io_out, io_err).wait
-
-            log_err = io_err.to_s
-            log_out = io_out.to_s
-
-            if log_err.size > 0
-              Logger.log "An error occured while running #{command}"
-              puts log_err
-              Logger.log "End of error"
-            else
-              puts log_out
-            end
-          end
+          Script::Run.new(@packages_path).on_install(package, script)
         when PostInstallType.symlink
-          source = script.source
-          target = script.target
-
-          if !source.nil? && !target.nil?
-            link(package, source, target)
-          end
+          Script::Symlink.new(@packages_path, @bin_path).on_install(package, script)
         else
           Logger.log "Unknown script command: #{script.type}."
         end
@@ -118,57 +83,14 @@ module Brrr
       scripts.each do |script|
         case script.type
         when PostInstallType.move
-          target = script.target
-          if !target.nil?
-            FileUtils.rm_rf (bin_path / target).to_s
-          end
+          Script::Move.new(@packages_path, @bin_path).on_uninstall(package, script)
         when PostInstallType.symlink
-          target = script.target
-          if !target.nil?
-            FileUtils.rm_rf (bin_path / target).to_s
-          end
+          Script::Symlink.new(@packages_path, @bin_path).on_uninstall(package, script)
         when PostInstallType.echo
         when PostInstallType.run
         else
           Logger.log "Unknown script command: #{script.type}."
         end
-      end
-    end
-
-    protected def link(package : String, file_path : String, link_path : String)
-      source = @packages_path / package / file_path
-
-      canResolvePath = link_path.starts_with?("/") || link_path.starts_with?(".") || link_path.starts_with?("~")
-      target = if canResolvePath
-                 Path[link_path].expand(home: Path.home)
-               else
-                 @bin_path / link_path
-               end
-
-      if File.exists? source
-        Logger.log "Linking #{source} to #{target}"
-        File.chmod(source, 0o755)
-        FileUtils.ln_sf(source.to_s, target.to_s)
-      else
-        Logger.log "Failed to link #{source} to #{target}"
-      end
-    end
-
-    protected def move(package : String, file_path : String, link_path : String)
-      source = @packages_path / package / file_path
-
-      canResolvePath = link_path.starts_with?("/") || link_path.starts_with?(".") || link_path.starts_with?("~")
-      to = if canResolvePath
-             Path[link_path].expand(home: Path.home)
-           else
-             link_path
-           end
-
-      if File.exists? source
-        Logger.log "Moving #{source} to #{to}"
-        FileUtils.mv([source.to_s], to.to_s)
-      else
-        Logger.log "Failed to move #{source} to #{to}"
       end
     end
 

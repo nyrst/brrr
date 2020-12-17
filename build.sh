@@ -1,4 +1,4 @@
 #!/bin/sh
 
 shards install
-shards build --static
+shards build --static --release

@@ -62,7 +62,7 @@ module Brrr
       end
 
       private def build_archs(data : FreezerData)
-        ["linux", "macos"].map do |arch|
+        ["linux", "macos", "macosarm"].map do |arch|
           apps = data.entries
             .select { |e| e.versions[e.latest_version].has_key? arch }
             .map { |e| to_hash(e, false) }

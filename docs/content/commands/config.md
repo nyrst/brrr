@@ -12,4 +12,4 @@ Usage: `brrr config <command> <key?> <value?>`
 
 The available configuration options are:
 
-- `arch`: supported values are `linux` or `macos`. 
+- `arch`: supported values are `linux`, `macos` or `macosarm`. 

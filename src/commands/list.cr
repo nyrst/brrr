@@ -11,7 +11,7 @@ module Brrr
         if arch.nil?
           puts "Please configure your arch first:"
           puts "  brrr config set arch <value>"
-          puts "  <value> can be linux or macos"
+          puts "  <value> can be linux, macos, macosarm"
           exit
         end
 

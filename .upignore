@@ -1,0 +1,6 @@
+*
+!docs
+docs/content
+docs/templates
+docs/beulogue.yml
+!docs/public/**

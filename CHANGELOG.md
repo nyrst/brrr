@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4181.89](https://github.com/nyrst/brrr/releases/tag/v0.4181.89)
+
+- :gift: add support for macosarm
+
 ## [0.2584.89](https://github.com/nyrst/brrr/releases/tag/v0.2584.89)
 
 - :gift: extract script commands, allow to specify working dir for "run"

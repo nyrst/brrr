@@ -1,0 +1,12 @@
+{
+  "name": "theme",
+  "version": "1.0.0",
+  "private": "true",
+  "scripts": {
+    "build:styles": "sass styles.scss ../public/styles.css"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.30.0"
+  }
+}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ site.title }}{% endblock %}
+
+{% block main %}
+<header>
+  <h1>
+    {{ title }}
+  </h1>
+
+  {{ content | escape }}
+</header>
+{% endblock %}

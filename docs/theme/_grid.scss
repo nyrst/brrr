@@ -1,0 +1,43 @@
+body {
+  display: grid;
+  grid-template-areas:
+    "nyrst"
+    "container";
+}
+
+.nav-nyrst {
+  grid-area: nyrst;
+}
+
+.container {
+  grid-area: container;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+
+  display: grid;
+  grid-template-areas:
+    "aside"
+    "main"
+    "footer";
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+}
+
+@media screen and (min-width: 31rem) {
+  .container {
+    grid-template-areas:
+      "aside main"
+      "footer footer";
+    grid-template-columns: 15rem 1fr;
+  }
+}
+
+main {
+  grid-area: main;
+}
+
+nav {
+  grid-area: aside;
+}

@@ -1,0 +1,8 @@
+base: https://brrr.nyrst.tools
+title: brrr documentation
+languages:
+- en
+sortPagesBy: weight
+sortPagesOrder: asc
+
+# See https://beulogue.ehret.me/en/usage/configuration.html

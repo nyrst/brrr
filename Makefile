@@ -25,6 +25,9 @@ dev: ## Run in dev mode with reloading
 deploy: docs ## Deploy the site
 	up deploy production
 
+docker-build: ## Build docker image
+	docker build -t nyrst/brrr .
+
 docs: docs-site docs-theme ## Build docs
 
 docs-site: ## Build the site

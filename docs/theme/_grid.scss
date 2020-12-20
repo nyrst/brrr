@@ -2,7 +2,8 @@ body {
   display: grid;
   grid-template-areas:
     "nyrst"
-    "container";
+    "container"
+    "footer";
 }
 
 .nav-nyrst {
@@ -19,8 +20,7 @@ body {
   display: grid;
   grid-template-areas:
     "aside"
-    "main"
-    "footer";
+    "main";
   grid-template-rows: auto;
   grid-template-columns: auto;
 }
@@ -28,8 +28,7 @@ body {
 @media screen and (min-width: 31rem) {
   .container {
     grid-template-areas:
-      "aside main"
-      "footer footer";
+      "aside main";
     grid-template-columns: 15rem 1fr;
   }
 }
@@ -40,4 +39,8 @@ main {
 
 nav {
   grid-area: aside;
+}
+
+footer {
+  grid-area: footer;
 }

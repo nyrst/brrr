@@ -24,17 +24,17 @@ Next steps: explore the commands, for example:
 Run it:
 
 ```shell
-docker run --rm -it brrr info atom
+docker run --rm -it nyrst/brrr info atom
 ```
 
 To generate freezer data with [Fish](https://fishshell.com/):
 
 ```shell
-docker run --rm -it -v {$PWD}:/workspace -w /workspace brrr info atom
+docker run --rm -it -v {$PWD}:/workspace -w /workspace nyrst/brrr info atom
 ```
 
 Or with bash:
 
 ```shell
-docker run --rm -it -v ${PWD}:/workspace -w /workspace brrr info atom
+docker run --rm -it -v ${PWD}:/workspace -w /workspace nyrst/brrr info atom
 ```

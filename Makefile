@@ -13,7 +13,7 @@ build: clean-bin ## Build brrr
 clean-bin: ## Clean bin folder
 	rm -rf bin
 
-build-static:
+build-static: ## Build a static binary for linux
 	docker run --rm -it -v ${CURDIR}:/workspace -w /workspace crystallang/crystal:0.35.1-alpine sh /workspace/build.sh
 
 build-release: clean-bin test ## Build brrr for release

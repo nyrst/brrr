@@ -16,3 +16,25 @@ Next steps: explore the commands, for example:
 => {{ ref("./commands/config.md") }}<br>
 => {{ ref("./commands/list.md") }}<br>
 => {{ ref("./commands/install.md") }}
+
+## :construction: Run with Docker
+
+`brrr` is available as a [Docker image](https://hub.docker.com/r/nyrst/brrr). This is experimental!
+
+Run it:
+
+```shell
+docker run --rm -it brrr info atom
+```
+
+To generate freezer data with [Fish](https://fishshell.com/):
+
+```shell
+docker run --rm -it -v {$PWD}:/workspace -w /workspace brrr info atom
+```
+
+Or with bash:
+
+```shell
+docker run --rm -it -v ${PWD}:/workspace -w /workspace brrr info atom
+```

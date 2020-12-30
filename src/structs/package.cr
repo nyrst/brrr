@@ -69,6 +69,7 @@ module Brrr
     include JSON::Serializable
     include YAML::Serializable
     property brrr : String
+    property brrr_version : String?
     property latest_version : String
     property name : String
     property releases_feed : String

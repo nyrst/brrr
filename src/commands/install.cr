@@ -63,6 +63,14 @@ module Brrr
 
         # Now, time to read the package and get some info
         package = Package.from_yaml(yaml)
+
+        # Check brrr version
+        brrr_version = package.brrr_version
+        if !brrr_version.nil? && !Common.can_upgrade(VERSION, brrr_version)
+          Logger.log("Incompatible brrr version (current: #{VERSION}, needed: #{brrr_version})")
+          return
+        end
+
         name = package.name
         cache_package_dir = @cache.path / name
 

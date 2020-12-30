@@ -1,15 +1,20 @@
 # Changelog
 
-## [0.4181.89](https://github.com/nyrst/brrr/releases/tag/v0.4181.89)
+## [0.6765.89](https://github.com/nyrst/brrr/releases/tag/0.6765.89)
+
+- :gift: allow multiple urls for a release
+- :gift: add check for brrr version
+
+## [0.4181.89](https://github.com/nyrst/brrr/releases/tag/0.4181.89)
 
 - :gift: add support for macosarm
 
-## [0.2584.89](https://github.com/nyrst/brrr/releases/tag/v0.2584.89)
+## [0.2584.89](https://github.com/nyrst/brrr/releases/tag/0.2584.89)
 
 - :gift: extract script commands, allow to specify working dir for "run"
 - :whale: build static binary with docker
 
-## [0.1597.89](https://github.com/nyrst/brrr/releases/tag/v0.1597.89)
+## [0.1597.89](https://github.com/nyrst/brrr/releases/tag/0.1597.89)
 
 - :gift: add list command
 - refactor a few things

@@ -92,7 +92,20 @@ module Brrr
         Common.save_yaml(cache_package_dir, name, yaml)
 
         # Time to download the binary
+        download(binary, cache_package_dir, name)
 
+        # Finally, we add the package to our installed packages
+        yaml_installation = <<-YAML
+          url: #{package.brrr}
+          version: #{latest_version}
+        YAML
+        installation = Installation.from_yaml yaml_installation
+        @config.add_installed_package(name, installation)
+
+        Logger.end "#{name} v#{latest_version} installed successfully!"
+      end
+
+      private def download(binary : Binary, cache_package_dir : Path, name : String)
         cache_target_path = download_and_get_target(binary.url, cache_package_dir)
 
         # Let's verify the hash (check if present is in the `verify` function)
@@ -107,16 +120,10 @@ module Brrr
         if binary.post_install
           @config.post_install(name, binary.post_install)
         end
+      end
 
-        # Finally, we add the package to our installed packages
-        yaml_installation = <<-YAML
-          url: #{package.brrr}
-          version: #{latest_version}
-        YAML
-        installation = Installation.from_yaml yaml_installation
-        @config.add_installed_package(name, installation)
-
-        Logger.end "#{name} v#{latest_version} installed successfully!"
+      private def download(binaries : Array(Binary), cache_package_dir : Path, name : String)
+        binaries.each { |b| download(b, cache_package_dir, name) }
       end
     end
   end

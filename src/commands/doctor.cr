@@ -52,6 +52,14 @@ module Brrr
 
         is_ok = [] of Bool
 
+        is_ok = is_ok + run_post_install(package_name, binary)
+
+        return is_ok.all?
+      end
+
+      private def run_post_install(package_name : String, binary : Binary)
+        is_ok = [] of Bool
+
         binary.post_install.each do |script|
           case script.type
           when PostInstallType.move
@@ -63,7 +71,13 @@ module Brrr
           end
         end
 
-        return is_ok.all?
+        is_ok
+      end
+
+      private def run_post_install(package_name : String, binaries : Array(Binary))
+        is_ok = [] of Bool
+        binaries.each { |b| is_ok = is_ok + run_post_install(package_name, b) }
+        is_ok
       end
 
       protected def download_yaml_and_load(package_name : String)

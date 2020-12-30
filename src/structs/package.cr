@@ -74,6 +74,6 @@ module Brrr
     property releases_feed : String
     property tags : Array(String)
     property url : String
-    property versions : Hash(String, Hash(String, Binary))
+    property versions : Hash(String, Hash(String, Binary | Array(Binary)))
   end
 end

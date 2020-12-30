@@ -56,13 +56,21 @@ module Brrr
             return
           end
 
-          @config.uninstall(package_name, binary[arch])
+          remove(binary[arch], package_name)
 
           # Clean cache
           @cache.uninstall package_name
 
           Logger.end "#{package_name} v#{installed_version} removed successfully!"
         end
+      end
+
+      private def remove(binary : Binary, package_name : String)
+        @config.uninstall(package_name, binary)
+      end
+
+      private def remove(binaries : Array(Binary), package_name : String)
+        binaries.each { |b| remove(b, package_name) }
       end
     end
   end

@@ -43,7 +43,9 @@ module Brrr
         # Read cache yaml
         package = @cache.read_yaml package_name
 
-        if !package.nil?
+        if package.nil?
+          Logger.log "Local package definition for #{package_name} not found! Is it really installed?"
+        else
           if !package.versions.has_key? installed_version
             Logger.log "Version #{installed_version} not found."
             return
@@ -51,26 +53,19 @@ module Brrr
 
           arch = @config.arch
           binary = package.versions[installed_version]
-          if !binary.has_key? arch
+
+          if !Common.get_archs(binary, package.templates).includes?(arch)
             Logger.log "Binary for arch #{arch} not found."
             return
           end
 
-          remove(binary[arch], package_name)
+          Worker.new(@config).remove(binary, installed_version, package_name, package)
 
           # Clean cache
           @cache.uninstall package_name
 
           Logger.end "#{package_name} v#{installed_version} removed successfully!"
         end
-      end
-
-      private def remove(binary : Binary, package_name : String)
-        @config.uninstall(package_name, binary)
-      end
-
-      private def remove(binaries : Array(Binary), package_name : String)
-        binaries.each { |b| remove(b, package_name) }
       end
     end
   end

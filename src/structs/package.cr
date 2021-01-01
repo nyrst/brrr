@@ -65,6 +65,21 @@ module Brrr
     property url : String
   end
 
+  alias VersionId = String
+
+  struct WithTemplate
+    include JSON::Serializable
+    include YAML::Serializable
+
+    property use_template : VersionId
+  end
+
+  alias Arch = String
+  alias Templates = Hash(VersionId, Hash(Arch, Binary | Array(Binary)))
+  alias VersionBinary = Hash(Arch, Binary | Array(Binary))
+  alias Version = WithTemplate | VersionBinary
+  alias Versions = Hash(VersionId, Version)
+
   struct Package
     include JSON::Serializable
     include YAML::Serializable
@@ -75,6 +90,7 @@ module Brrr
     property releases_feed : String
     property tags : Array(String)
     property url : String
-    property versions : Hash(String, Hash(String, Binary | Array(Binary)))
+    property templates : Templates?
+    property versions : Versions
   end
 end

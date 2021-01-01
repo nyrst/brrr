@@ -3,6 +3,18 @@ require "semantic_version"
 
 module Brrr
   module Common
+    def self.get_archs(versions : WithTemplate, templates : Templates?)
+      if !templates || !templates.has_key? versions.use_template
+        return [] of String
+      else
+        get_archs(templates[versions.use_template], nil)
+      end
+    end
+
+    def self.get_archs(versions : Hash(Arch, Binary | Array(Binary)), templates : Templates?)
+      versions.keys
+    end
+
     def self.can_upgrade(latest_version : String, installed_version : String)
       begin
         (SemanticVersion.parse(latest_version) <=> SemanticVersion.parse(installed_version)) == 1

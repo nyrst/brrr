@@ -2,6 +2,7 @@ require "../lib/common"
 require "../lib/errors"
 require "../lib/downloader"
 require "../lib/repository"
+require "../lib/worker/worker"
 
 module Brrr
   module Commands
@@ -39,15 +40,6 @@ module Brrr
 
       protected def show_version(version : Installation)
         version.version
-      end
-
-      protected def download_and_get_target(url : String, cache_package_dir : Path)
-        start_index = (url.rindex("/") || 0) + 1
-        binary_name = url[start_index..-1]
-        cache_target_path = cache_package_dir / binary_name
-        Downloader.get_file(url, cache_target_path)
-
-        cache_target_path
       end
 
       protected def install(package_name : String, package_version : String)
@@ -88,19 +80,18 @@ module Brrr
           return
         end
 
-        latest_binary = package.versions[latest_version]
-        if !latest_binary.has_key? @config.arch
-          Logger.log "Binary for arch #{@config.arch} not found. Available archs are: #{latest_binary.keys.join(",")}"
+        latest_version_details = package.versions[latest_version]
+        version_archs = Common.get_archs(latest_version_details, package.templates)
+        if !version_archs.includes? @config.arch
+          Logger.log "Binary for arch #{@config.arch} not found. Available archs are: #{version_archs.join(",")}"
           return
         end
-
-        binary = latest_binary[@config.arch]
 
         # Let's save this yaml
         Common.save_yaml(cache_package_dir, name, yaml)
 
         # Time to download the binary
-        download(binary, cache_package_dir, name)
+        Worker.new(@config).download(latest_version_details, latest_version, cache_package_dir, name, package)
 
         # Finally, we add the package to our installed packages
         yaml_installation = <<-YAML
@@ -111,27 +102,6 @@ module Brrr
         @config.add_installed_package(name, installation)
 
         Logger.end "#{name} v#{latest_version} installed successfully!"
-      end
-
-      private def download(binary : Binary, cache_package_dir : Path, name : String)
-        cache_target_path = download_and_get_target(binary.url, cache_package_dir)
-
-        # Let's verify the hash (check if present is in the `verify` function)
-        if !Downloader.verify(cache_target_path, binary)
-          Logger.log "Failed to verify checksum for file #{cache_target_path}."
-          return
-        end
-
-        # Then we can extract from the cache to our packages folder
-        Downloader.extract(cache_target_path, binary, @config.packages_path / name)
-
-        if binary.post_install
-          @config.post_install(name, binary.post_install)
-        end
-      end
-
-      private def download(binaries : Array(Binary), cache_package_dir : Path, name : String)
-        binaries.each { |b| download(b, cache_package_dir, name) }
       end
     end
   end

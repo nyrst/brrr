@@ -18,8 +18,8 @@ module Brrr
           help
         elsif command == "generate"
           data = get_data
-          build_apps data
-          build_archs data
+          build_apps(data)
+          build_archs(data)
         else
           help
         end
@@ -64,26 +64,26 @@ module Brrr
       private def build_archs(data : FreezerData)
         ["linux", "macos", "macosarm"].map do |arch|
           apps = data.entries
-            .select { |e| e.versions[e.latest_version].has_key? arch }
+            .select { |e| Common.get_archs(e.versions[e.latest_version], e.templates).includes? arch }
             .map { |e| to_hash(e, false) }
 
           File.write(data.folder / "apps-#{arch}.json", apps.to_json)
         end
       end
 
-      private def to_hash(e : Brrr::Package, includes_archs : Bool)
+      private def to_hash(e : Package, includes_archs : Bool)
         item = Hash(String, String | Array(String)).new
         # item["brrr"] = e.brrr
         item["name"] = e.name
         item["latest_version"] = e.latest_version
         # item["tags"] = e.tags
         if includes_archs
-          item["archs"] = e.versions[e.latest_version].keys
+          item["archs"] = Common.get_archs(e.versions[e.latest_version], e.templates)
         end
         item
       end
 
-      private def generate_web_tags(folder : Path, entries : Array(Brrr::Package))
+      private def generate_web_tags(folder : Path, entries : Array(Package))
         tags = entries
           .map { |e| e.tags }
           .reduce { |acc, e| acc + e }

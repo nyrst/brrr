@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.10946.144](https://github.com/nyrst/brrr/releases/tag/0.10946.144)
+
+- :gift: handle templates in package definitions
+- :fire: remove doctor command
+
 ## [0.6765.89](https://github.com/nyrst/brrr/releases/tag/0.6765.89)
 
 - :gift: allow multiple urls for a release

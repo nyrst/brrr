@@ -29,8 +29,6 @@ module Brrr
           Commands::Cache.new(config, cache, args[1..-1])
         when "config"
           Commands::Configure.new(config, args[1..-1])
-        when "doctor"
-          Commands::Doctor.new(config, cache, args[1..-1])
         when "freezer"
           Commands::Freezer.new(config, args[1..-1])
         when "h", "help"

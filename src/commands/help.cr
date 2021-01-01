@@ -21,7 +21,6 @@ module Brrr
 
         cache
           clean                     Clean the cache of unused packages.
-        doctor                      Check the sanity of your installed packages.
         help                        Show help (alias: h)
         version                     Print the current version of brrr (alias: v).
 

@@ -23,6 +23,14 @@ module Brrr
       end
     end
 
+    def self.is_same_version(latest_version : String, installed_version : String)
+      begin
+        (SemanticVersion.parse(latest_version) <=> SemanticVersion.parse(installed_version)) == 0
+      rescue
+        latest_version > installed_version
+      end
+    end
+
     def self.get_yaml(repository : Repository, package : String)
       local_path = Path[package].expand(Dir.current)
       is_local = repository.is_local_package local_path

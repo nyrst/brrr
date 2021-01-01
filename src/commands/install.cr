@@ -58,7 +58,7 @@ module Brrr
 
         # Check brrr version
         brrr_version = package.brrr_version
-        if !brrr_version.nil? && !Common.can_upgrade(VERSION, brrr_version)
+        if !brrr_version.nil? && !(Common.can_upgrade(VERSION, brrr_version) || Common.is_same_version(VERSION, brrr_version))
           Logger.log("Incompatible brrr version (current: #{VERSION}, needed: #{brrr_version})")
           return
         end

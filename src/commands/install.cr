@@ -20,14 +20,19 @@ module Brrr
             puts "Try the following command:"
             puts ""
             puts "  brrr upgrade #{package_name}"
-            exit 0
+            break
           end
 
-          if package_name.includes? "@"
-            package_name, package_version = package_name.split("@")
-            install(package_name, package_version)
-          else
-            install(package_name, "latest")
+          begin
+            if package_name.includes? "@"
+              package_name, package_version = package_name.split("@")
+              install(package_name, package_version)
+            else
+              install(package_name, "latest")
+            end
+          rescue ex
+            puts "Failed to install #{package_name}"
+            puts "  #{ex.message}"
           end
 
           puts ""

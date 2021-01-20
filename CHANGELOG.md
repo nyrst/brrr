@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.17711.144](https://github.com/nyrst/brrr/releases/tag/0.17711.144)
+
+- :gift: nicer way to have the version in a template
+
 ## [0.10946.144](https://github.com/nyrst/brrr/releases/tag/0.10946.144)
 
 - :gift: handle templates in package definitions

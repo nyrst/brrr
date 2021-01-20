@@ -46,6 +46,10 @@ A WithTemplate has the following properties:
 
 This requires another root property in your yaml: `templates`. The type is `Hash(VersionId, Hash(Arch, Binary | Array(Binary)))`.
 
+In a template, use the following to replace part of the `url`:
+
+- `{brrr_package_version}`: replace with the package version.
+
 ### PostInstall
 
 A PostInstall has the following properties:

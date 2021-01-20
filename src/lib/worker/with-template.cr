@@ -11,7 +11,7 @@ module Brrr
 
       binary = templates[template_version]
       le_hash = Hash(String, String).new
-      le_hash["brrr_package_version"] = latest_version
+      le_hash["{brrr_package_version}"] = latest_version
 
       download_binaries(bidouille(binary, le_hash), cache_package_dir, name, package)
     end
@@ -27,7 +27,7 @@ module Brrr
 
       binary = templates[template_version]
       le_hash = Hash(String, String).new
-      le_hash["brrr_package_version"] = installed_version
+      le_hash["{brrr_package_version}"] = installed_version
 
       remove_binaries(bidouille(binary, le_hash), package_name)
     end

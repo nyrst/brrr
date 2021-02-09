@@ -3,7 +3,7 @@ module Brrr
     class Configure
       def initialize(@config : Brrr::Config, @args : Array(String))
         if args.size == 0
-          puts "`brrr config` needs some options."
+          puts "`brrr config` needs some options: list, set"
           Commands::Help.new
           return
         end

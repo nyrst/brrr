@@ -17,6 +17,13 @@ Next steps: explore the commands, for example:
 => {{ ref("./commands/list.md") }}<br>
 => {{ ref("./commands/install.md") }}
 
+## Configure
+
+Run `brrr config set arch something`, where `something` is either:
+
+- `linux`
+- `macos`
+
 ## :construction: Run with Docker
 
 `brrr` is available as a [Docker image](https://hub.docker.com/r/nyrst/brrr). This is experimental!

@@ -12,4 +12,5 @@ Usage: `brrr config <command> <key?> <value?>`
 
 The available configuration options are:
 
-- `arch`: supported values are `linux`, `macos` or `macosarm`. 
+- `arch`: supported values are `linux`, `macos` or `macosarm`
+- `repository`: the base url for the repository. Defaults to "http://nyrst.github.io/freezer/"

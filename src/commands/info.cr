@@ -39,7 +39,7 @@ module Brrr
         package_url = package_installation.url
         installed_version = package_installation.version
 
-        yaml = Common.get_yaml(@repository, package_url)
+        yaml = Common.get_yaml(@repository, package_url).body
 
         if yaml.nil?
           PackageNotFound.log(package_name, @repository.repository)

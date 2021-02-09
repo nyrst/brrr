@@ -59,7 +59,15 @@ module Brrr
         end
 
         # Now, time to read the package and get some info
-        package = Package.from_yaml(yaml)
+        url = yaml.url
+        body = yaml.body
+
+        if body.nil?
+          Logger.end "Failed to get #{package_name} data"
+          return
+        end
+
+        package = Package.from_yaml(body)
 
         # Check brrr version
         brrr_version = package.brrr_version
@@ -93,20 +101,20 @@ module Brrr
         end
 
         # Let's save this yaml
-        Common.save_yaml(cache_package_dir, name, yaml)
+        Common.save_yaml(cache_package_dir, name, body)
 
         # Time to download the binary
         Worker.new(@config).download(latest_version_details, latest_version, cache_package_dir, name, package)
 
         # Finally, we add the package to our installed packages
         yaml_installation = <<-YAML
-          url: #{package.brrr}
+          url: #{yaml.url}
           version: #{latest_version}
         YAML
         installation = Installation.from_yaml yaml_installation
         @config.add_installed_package(name, installation)
 
-        Logger.end "#{name} v#{latest_version} installed successfully!"
+        Logger.end "#{name} #{latest_version} installed successfully!"
       end
     end
   end

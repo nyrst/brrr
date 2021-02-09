@@ -47,7 +47,14 @@ module Brrr
         end
 
         # Now, time to read the package and get some info
-        package = Package.from_yaml(yaml)
+        body = yaml.body
+
+        if body.nil?
+          Logger.log "Failed to get content for #{package_name}"
+          return
+        end
+
+        package = Package.from_yaml(body)
         package_name = package.name
         latest_version = package.latest_version
         cache_package_dir = @cache.path / package_name

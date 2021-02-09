@@ -2,6 +2,14 @@ require "halite"
 require "./cache"
 
 module Brrr
+  struct RepositoryResult
+    property url : String?
+    property body : String?
+
+    def initialize(@url : String?, @body : String?)
+    end
+  end
+
   class Repository
     @@DEFAULT_REPOSITORY = "http://nyrst.github.io/freezer/"
 
@@ -36,10 +44,10 @@ module Brrr
 
       begin
         r.raise_for_status
-        r.body
+        RepositoryResult.new(url, r.body)
       rescue ex : Halite::ClientError | Halite::ServerError
         # puts "[#{ex.status_code}] #{ex.status_message} (#{ex.class})"
-        nil
+        RepositoryResult.new(url, nil)
       end
     end
 
@@ -60,7 +68,7 @@ module Brrr
         file.gets_to_end
       end
 
-      content
+      RepositoryResult.new(nil, content)
     end
 
     def is_local_package(path : Path)

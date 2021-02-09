@@ -48,7 +48,14 @@ module Brrr
           exit 0
         else
           # Now, time to read the package and get some info
-          package = Package.from_yaml(yaml)
+          body = yaml.body
+
+          if body.nil?
+            puts "Failed to read content for #{package_name}"
+            return
+          end
+
+          package = Package.from_yaml(body)
 
           latest = package.latest_version
           all_versions = package.versions.keys

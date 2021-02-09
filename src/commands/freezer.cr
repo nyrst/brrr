@@ -42,7 +42,7 @@ module Brrr
         entries = Dir.entries(cwd)
           .select { |e| e.ends_with? ".yaml" }
           .map do |e|
-            yaml = Common.get_yaml(@repository, e)
+            yaml = Common.get_yaml(@repository, e).body
 
             if !yaml.nil?
               # Now, time to read the package and get some info

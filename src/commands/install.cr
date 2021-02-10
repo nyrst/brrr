@@ -104,7 +104,7 @@ module Brrr
 
         # Finally, we add the package to our installed packages
         yaml_installation = <<-YAML
-          url: #{yaml.url}
+          url: #{url}
           version: #{latest_version}
         YAML
         installation = Installation.from_yaml yaml_installation

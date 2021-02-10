@@ -11,9 +11,9 @@ An example can help, right? The package definition for [exa](https://github.com/
 
 A package is a yaml file with the following mandatory properties:
 
-- `brrr` (`String`): the url of the definition file.
-- `latest_version` (`String`): the latest available version (used later in `versions`).
 - `name` (`String`): the name of the package.
+- `latest_version` (`String`): the latest available version (used later in `versions`).
+- `brrr_version` (`String`): the minimum brrr version to use with the package.
 - `tags` (`Array(String)`): an array of tags related to the project.
 - `url` (`String`): the url of the package repository.
 - `versions` (`Hash(VersionId, Version)`): the real deal, where versions are described.

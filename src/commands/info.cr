@@ -9,37 +9,20 @@ module Brrr
         end
 
         args.each do |package_name|
-          info(package_name, if @config.installed.has_key? package_name
-            @config.installed[package_name]
-          else
-            nil
+          if @config.installed.has_key? package_name
+            info(package_name, @config.installed[package_name])
+            puts ""
           end
-          )
-          puts ""
         end
-      end
-
-      protected def info(name : String, version : String | Nil)
-        installation_version = if version.nil?
-                                 "latest"
-                               else
-                                 version
-                               end
-
-        yaml_installation = <<-YAML
-          url: #{name}
-          version: #{installation_version}
-        YAML
-        installation = Installation.from_yaml yaml_installation
-
-        info(name, installation)
       end
 
       protected def info(package_name : String, package_installation : Installation)
         package_url = package_installation.url
         installed_version = package_installation.version
 
-        yaml = Common.get_yaml(@repository, package_url).body
+        result = Common.get_yaml(@repository, package_url)
+        yaml = result.body
+        url = result.url
 
         if yaml.nil?
           PackageNotFound.log(package_name, @repository.repository)
@@ -52,7 +35,7 @@ module Brrr
           content = <<-TEXT
           #{name}
           #{line}
-          Definition: #{package.brrr}
+          Definition: #{url}
           Available versions: #{package.versions.keys.sort.join ", "}
           Latest version: #{package.latest_version}
           TEXT

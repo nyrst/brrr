@@ -24,18 +24,12 @@ module Brrr
         end
       end
 
-      protected def upgrade(name : String, version : String)
-        yaml_installation = <<-YAML
-          url: #{name}
-          version: #{version}
-        YAML
-        installation = Installation.from_yaml yaml_installation
-
-        upgrade(name, installation)
-      end
-
       protected def upgrade(package_name : String, package_installation : Installation)
-        package_url = package_installation.url
+        package_url = if package_installation.url == ""
+                        package_name
+                      else
+                        package_installation.url
+                      end
         current_version = package_installation.version
 
         # Let's get this package

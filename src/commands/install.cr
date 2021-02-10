@@ -39,10 +39,6 @@ module Brrr
         end
       end
 
-      protected def show_version(version : String)
-        version
-      end
-
       protected def show_version(version : Installation)
         version.version
       end

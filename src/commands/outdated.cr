@@ -26,16 +26,6 @@ module Brrr
         end
       end
 
-      protected def outdated(name : String, version : String)
-        yaml_installation = <<-YAML
-          url: #{name}
-          version: #{version}
-        YAML
-        installation = Installation.from_yaml yaml_installation
-
-        outdated(name, installation)
-      end
-
       protected def outdated(package_name : String, package_installation : Installation)
         package_url = package_installation.url
         current_version = package_installation.version

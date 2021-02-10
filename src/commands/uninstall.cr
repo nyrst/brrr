@@ -25,16 +25,6 @@ module Brrr
         run(name, @config.installed[name])
       end
 
-      protected def run(package_name : String, package_version : String)
-        yaml_installation = <<-YAML
-          url: #{package_name}
-          version: #{package_version}
-        YAML
-        installation = Installation.from_yaml yaml_installation
-
-        run(package_name, installation)
-      end
-
       protected def run(package_name : String, installation : Installation)
         installed_version = installation.version
 

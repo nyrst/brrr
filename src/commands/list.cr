@@ -18,12 +18,8 @@ module Brrr
         run
       end
 
-      protected def get_version(version : String)
-        version
-      end
-
-      protected def get_version(version : Installation)
-        version.version
+      protected def get_version(installation : Installation)
+        installation.version
       end
 
       protected def run

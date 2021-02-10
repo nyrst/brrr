@@ -11,6 +11,6 @@ module Brrr
     include YAML::Serializable
     property arch : String
     property repository : String?
-    property installed : Hash(String, String | Installation)
+    property installed : Hash(String, Installation)
   end
 end

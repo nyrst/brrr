@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28657.144](https://github.com/nyrst/brrr/releases/tag/0.28657.144)
+
+- :gift: nicer message on `brrr config`
+- :gift: store the real url instead of the config file
+- :gift: remove old way to handle package version in config (BREAKING)
+- :gift: show real download url since it is removed from the freezer files
+
 ## [0.17711.144](https://github.com/nyrst/brrr/releases/tag/0.17711.144)
 
 - :gift: nicer way to have the version in a template

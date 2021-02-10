@@ -17,15 +17,14 @@ end
 
 def get_package_yaml
   yaml = <<-YAML
-  brrr: "https://nyrst.github.io/freezer/atom.yaml"
-  latest_version: 0.55.5
   name: "brrr"
+  latest_version: 0.28657.144
   releases_feed: "https://github.com/nyrst/brrr/releases.atom"
   tags:
     - brrr
   url: "https://github.com/nyrst/brrr"
   versions:
-    "0.55.5":
+    "0.28657.144":
       linux:
         post_install:
           -
@@ -33,7 +32,7 @@ def get_package_yaml
             source: "brrr"
             target: "brrr"
         binary_type: "tar"
-        url: "https://github.com/nyrst/brrr/releases/download/v0.55.5/brrr-linux.tar.gz"
+        url: "https://github.com/nyrst/brrr/releases/download/v0.28657.144/brrr-linux.tar.gz"
   YAML
 
   yaml

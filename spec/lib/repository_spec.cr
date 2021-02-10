@@ -16,7 +16,7 @@ describe Brrr::Repository do
   describe "#get_package" do
     with_server do
       result = repository.get_package "brrr"
-      result.should eq get_package_yaml
+      result.body.should eq get_package_yaml
     end
   end
 

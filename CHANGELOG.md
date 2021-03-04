@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.46368.144](https://github.com/nyrst/brrr/releases/tag/0.46368.144)
+
+- :gift: allow more fields in templates
+
 ## [0.28657.144](https://github.com/nyrst/brrr/releases/tag/0.28657.144)
 
 - :gift: nicer message on `brrr config`

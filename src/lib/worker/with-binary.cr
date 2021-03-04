@@ -17,16 +17,47 @@ module Brrr
       end
     end
 
-    private def bidouille(binary : Binary, replacement : Hash(String, String))
-      url = binary.url
-
+    private def replace(from : String, replacement : Hash(String, String))
+      to = from
       replacement.each do |key, value|
-        url = url.gsub(key, value)
+        to = to.gsub(key, value)
+      end
+      to
+    end
+
+    private def bidouille(binary : Binary, replacement : Hash(String, String))
+      binary.post_install = binary.post_install.map do |p|
+        # Needed for move and symlink.
+        source = p.source
+        if !source.nil?
+          p.source = replace(source, replacement)
+        end
+        target = p.target
+        if !target.nil?
+          p.target = replace(target, replacement)
+        end
+
+        # For echo message
+        message = p.message
+        if !message.nil?
+          p.message = replace(message, replacement)
+        end
+
+        # For run command
+        command = p.command
+        if !command.nil?
+          p.command = replace(command, replacement)
+        end
+        working_directory = p.working_directory
+        if !working_directory.nil?
+          p.working_directory = replace(working_directory, replacement)
+        end
+
+        p
       end
 
-      # TODO replace version in scripts (symlink/move)
+      binary.url = replace(binary.url, replacement)
 
-      binary.url = url
       binary
     end
 
